@@ -1,6 +1,6 @@
 import React from "react";
 
-const BtnGeneral = ({text, handleClick, width, height, color, borderRadius, shadow}) => {
+const BtnGeneral = ({text, handleClick, width, height, color, borderRadius, img, shadow}) => {
     const style = {
         width: width,
         height: height,
@@ -9,7 +9,12 @@ const BtnGeneral = ({text, handleClick, width, height, color, borderRadius, shad
         boxShadow: shadow
     }
     return (
-        <button style={style} onClick={handleClick}>{text}</button>
+        <div>
+            <button style={style} onClick={handleClick} className="btn">
+                    <img src={img}/>
+                    {text}
+            </button>
+        </div>
     )
 }
 

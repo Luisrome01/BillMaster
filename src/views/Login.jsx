@@ -5,10 +5,14 @@ import './css/Login.css';
 // Components 
 import BtnGeneral from "../components/buttons/BtnGeneral";
 import InputGeneral from "../components/inputs/InputGeneral";
+import image from "../assets/tabler_logout.svg"
 
 const Login = () => {
     const Click = () => {
         console.log("Click me!");
+    }
+    const Chacon = () =>{
+        console.log("Chacon es un mmwebo");
     }
     return (
         <div>
@@ -22,7 +26,7 @@ const Login = () => {
                     placeholder="Usuario"
                     width="200px"
                     height="30px"
-                    color="#AEBBFD"
+                    // color="#AEBBFD"
                     borderRadius="10px"
                     shadow="5px 5px 5px #888888"
                     />
@@ -32,6 +36,17 @@ const Login = () => {
                     width="110px"
                     height="45px"
                     color="#AEBBFD"
+                    borderRadius="10px"
+                    shadow="5px 5px 5px #888888"
+                    img={image}
+                />
+
+                    <BtnGeneral 
+                    text="Chacon" 
+                    handleClick={Chacon}
+                    width="200px"
+                    height="45px"
+                    color="red"
                     borderRadius="10px"
                     shadow="5px 5px 5px #888888"
                 />
