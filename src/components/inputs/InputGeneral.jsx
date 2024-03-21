@@ -1,6 +1,6 @@
 import React from "react";
-
-const InputGeneral = ({type, placeholder, width, height, color, borderRadius, shadow}) => {
+import "./css/InputGeneral.css";
+const InputGeneral = ({type, placeholder, width, height, color, borderRadius, shadow, name}) => {
     const style = {
         width: width,
         height: height,
@@ -8,8 +8,13 @@ const InputGeneral = ({type, placeholder, width, height, color, borderRadius, sh
         borderRadius: borderRadius,
         boxShadow: shadow
     }
-    return (
-        <input type={type} placeholder={placeholder} style={style} className="InputGeneral"/>
+    return (<>
+            <div className="containerName">
+                <span>{name}</span>
+            </div>
+            
+            <input type={type} placeholder={placeholder} style={style} className="InputGeneral"/>
+        </>
     )
 }
 

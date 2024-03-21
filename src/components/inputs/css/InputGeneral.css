@@ -1,0 +1,15 @@
+span{
+    color: black;
+    margin-left: 50px;
+    font-weight: bold;
+}
+.containerName{
+    width: 100%;
+}
+input{
+    color: black;
+    font-weight: bold;
+    border: none;
+    outline: none;
+
+}
