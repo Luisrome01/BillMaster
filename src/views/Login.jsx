@@ -16,11 +16,11 @@ const Login = () => {
             <div className="container">
                 <div className="subContainer">
                     <div className="containerTitle">
-                        <h3 className="title">Login</h3>
+                        <h3 className="title">Bill Master</h3>
                     </div>
 
                     <div className="containerSubTitle">
-                        <p className="enum">Bienvenido a Bill Master</p>
+                        <p className="enum">Bienvenido</p>
                         <h1 className="subTitle">Iniciar Sesión</h1>
                     </div>
 
@@ -32,7 +32,7 @@ const Login = () => {
                     
                     <InputGeneral 
                     name={"Contraseña"}
-                    type="text" 
+                    type="password" 
                     placeholder=" Contraseña" 
                     />
 
@@ -46,7 +46,7 @@ const Login = () => {
                     />
 
                     <div className="containerLink">
-                        <p className="link">I don't have an account? Sign up</p>
+                        <p className="link">No tienes una cuenta? Registrate</p>
                     </div>
                 </div>
                 <img src={page} alt="imagen" className="page"/>

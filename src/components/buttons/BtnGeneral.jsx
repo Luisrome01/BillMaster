@@ -1,5 +1,5 @@
 import React from "react";
-
+import "./css/btn.css"
 const BtnGeneral = ({text, handleClick, width, height, color, borderRadius, img, shadow}) => {
     const style = {
         width: width,

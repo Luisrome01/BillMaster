@@ -37,6 +37,9 @@
     align-items: center;
     display: flex;
     justify-content: center;
+    gap: 10px;
+    color: black;
+    font-weight: bold;
 }
 
 .InputGeneral {
