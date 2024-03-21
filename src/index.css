@@ -12,7 +12,24 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
-
+header{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.5em 2em;
+  background-color: #1a1a1a;
+}
+li{
+  list-style: none;
+  text-align: center;
+}
+ul{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0;
+  gap: 1em;
+}
 a {
   font-weight: 500;
   color: #646cff;
