@@ -10,7 +10,7 @@ const BtnGeneral = ({text, handleClick, width, height, color, borderRadius, img,
     }
     return (
         <div>
-            <button style={style} onClick={handleClick} className="btn">
+            <button style={style} onClick={handleClick} className="BtnGeneral">
                     <img src={img}/>
                     {text}
             </button>

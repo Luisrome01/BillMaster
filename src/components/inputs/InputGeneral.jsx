@@ -9,7 +9,7 @@ const InputGeneral = ({type, placeholder, width, height, color, borderRadius, sh
         boxShadow: shadow
     }
     return (
-        <input type={type} placeholder={placeholder} style={style} />
+        <input type={type} placeholder={placeholder} style={style} className="InputGeneral"/>
     )
 }
 
