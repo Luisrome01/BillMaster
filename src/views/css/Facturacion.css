@@ -1,0 +1,68 @@
+body {
+	background-color: #ffffff;
+	margin: 0;
+	padding: 0;
+	height: 100%;
+	box-sizing: border-box;
+	color: black;
+}
+
+html {
+	height: 100%;
+}
+
+.FactContainer {
+	display: flex;
+	flex-direction: row;
+	background-color: #ffffff;
+	width: 100%;
+	height: 100%;
+}
+
+.FactNavContainer {
+	flex-basis: 22.5%;
+	border-right: 2px solid #ebebeb;
+}
+
+.FactContentContainer {
+	flex-basis: 77.5%;
+	display: flex;
+	flex-direction: column;
+	width: 75%;
+	height: 100vh;
+	border-radius: 20px;
+	background-color: #f5f5f5;
+}
+
+.FactContentTop {
+	background-color: #ffffff;
+	display: flex;
+	align-items: center;
+	flex-direction: row;
+	gap: 25px;
+	flex-basis: 15%;
+	position: relative; /* Agrega esta línea para posicionar correctamente el pseudo-elemento */
+}
+
+.FactContentTop::after {
+	content: "";
+	position: absolute;
+	bottom: 0;
+	left: 5%;
+	width: 90%; /* Ajusta el porcentaje del ancho del borde inferior aquí */
+	height: 5px;
+	background-image: linear-gradient(to right, #aebbfd, #ff6060);
+	background-repeat: no-repeat;
+	border-radius: 5px;
+}
+.FactContentBottom {
+	flex-basis: 85%;
+	background-color: #ffffff;
+}
+
+.FactTitle {
+	color: black;
+	font-weight: bold;
+	flex-basis: 60%;
+	margin-left: 5%;
+}

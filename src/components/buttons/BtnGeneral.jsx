@@ -1,21 +1,58 @@
 import React from "react";
-import "./css/btn.css"
-const BtnGeneral = ({text, handleClick, width, height, color, borderRadius, img, shadow}) => {
-    const style = {
-        width: width,
-        height: height,
-        backgroundColor: color,
-        borderRadius: borderRadius,
-        boxShadow: shadow
-    }
-    return (
-        <div>
-            <button style={style} onClick={handleClick} className="BtnGeneral">
-                    <img src={img}/>
-                    {text}
-            </button>
-        </div>
-    )
-}
+import "./css/btn.css";
+import { useState } from "react";
+
+const BtnGeneral = ({ text, handleClick, width, height, color, onHoverColor, borderRadius, img, shadow }) => {
+	const [isHovered, setIsHovered] = useState(false);
+
+	const handleMouseEnter = () => {
+		setIsHovered(true);
+	};
+	const handleMouseLeave = () => {
+		setIsHovered(false);
+		if (isPressed) {
+			setIsPressed(false);
+		}
+	};
+
+	const [isPressed, setIsPressed] = useState(false);
+
+	const handlePress = () => {
+		setIsPressed(true);
+	};
+	const handleRelease = () => {
+		setIsPressed(false);
+	};
+
+	const style = {
+		width: width ? width : "110px",
+		height: height ? height : "45px",
+		backgroundColor: color ? color : "#AEBBFD",
+		borderRadius: borderRadius ? borderRadius : "10px",
+		boxShadow: shadow ? shadow : "0px 4px 4px rgba(0, 0, 0, 1)",
+		transition: "background-color 0.3s, transform 0.1s, box-shadow 0.1s",
+
+		//obscurece el color del boton cuando el mouse esta sobre el boton
+		...(isHovered && { backgroundColor: onHoverColor ? onHoverColor : "#8E9BFF", cursor: "pointer" }),
+		// Anima que el boton se hunda cuando se presiona
+		...(isPressed && { transform: "scale(0.95)", boxShadow: "0px 2px 2px rgba(0, 0, 0, 0.75)" }),
+	};
+	return (
+		<div>
+			<button
+				style={style}
+				onClick={handleClick}
+				onMouseEnter={handleMouseEnter}
+				onMouseLeave={handleMouseLeave}
+				onMouseDown={handlePress}
+				onMouseUp={handleRelease}
+				className="BtnGeneral"
+			>
+				<img src={img} />
+				{text}
+			</button>
+		</div>
+	);
+};
 
 export default BtnGeneral;
