@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import "./css/Login.css";
 
 // Components
@@ -8,9 +9,6 @@ import image from "../assets/tabler_logout.svg";
 import page from "../assets/Group2015.svg";
 
 const Login = () => {
-	const Click = () => {
-		console.log("Click me!");
-	};
 	return (
 		<div className="LogContainerGeneral">
 			<div className="LogContainer">
@@ -28,11 +26,9 @@ const Login = () => {
 
 					<InputGeneral name={"Contraseña"} type="password" placeholder=" Contraseña" width="80%" />
 
-					<BtnGeneral text="Ingresar" handleClick={Click} img={image} />
-
-					<div className="LogContainerLink">
-						<p className="LogLink">No tienes una cuenta? Registrate</p>
-					</div>
+					<Link to="/main">
+						<BtnGeneral text="Ingresar" handleClick={() => {}} img={image} />
+					</Link>
 				</div>
 				<div className="LogImgContainer">
 					<img src={page} alt="imagen" />

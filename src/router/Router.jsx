@@ -1,6 +1,6 @@
 import { Route, Routes } from "react-router-dom";
 import Login from "../views/Login";
-import Facturacion from "../views/Facturacion";
+import MainView from "../views/MainView";
 
 const Router = () => {
 	return (
@@ -8,7 +8,7 @@ const Router = () => {
 			<Routes>
 				{/* <Route path='/' element={<></>} /> */}
 				<Route path="/" element={<Login />} />
-				<Route path="/facturacion" element={<Facturacion />} />
+				<Route path="/main" element={<MainView />} />
 			</Routes>
 		</>
 	);

@@ -11,7 +11,7 @@ html {
 	height: 100%;
 }
 
-.FactContainer {
+.MainContainer {
 	display: flex;
 	flex-direction: row;
 	background-color: #ffffff;
@@ -19,12 +19,12 @@ html {
 	height: 100%;
 }
 
-.FactNavContainer {
+.MainNavContainer {
 	flex-basis: 22.5%;
 	border-right: 2px solid #ebebeb;
 }
 
-.FactContentContainer {
+.MainContentContainer {
 	flex-basis: 77.5%;
 	display: flex;
 	flex-direction: column;
@@ -34,7 +34,7 @@ html {
 	background-color: #f5f5f5;
 }
 
-.FactContentTop {
+.MainContentTop {
 	background-color: #ffffff;
 	display: flex;
 	align-items: center;
@@ -44,7 +44,7 @@ html {
 	position: relative; /* Agrega esta línea para posicionar correctamente el pseudo-elemento */
 }
 
-.FactContentTop::after {
+.MainContentTop::after {
 	content: "";
 	position: absolute;
 	bottom: 0;
@@ -55,12 +55,12 @@ html {
 	background-repeat: no-repeat;
 	border-radius: 5px;
 }
-.FactContentBottom {
+.MainContentBottom {
 	flex-basis: 85%;
 	background-color: #ffffff;
 }
 
-.FactTitle {
+.MainTitle {
 	color: black;
 	font-weight: bold;
 	flex-basis: 60%;
