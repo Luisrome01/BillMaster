@@ -12,8 +12,7 @@ const InputGeneral = ({type, placeholder, width, height, color, borderRadius, sh
             <div className="containerName">
                 <span>{name}</span>
             </div>
-            
-            <input type={type} placeholder={placeholder} style={style} className="InputGeneral"/>
+                <input type={type} placeholder={placeholder} style={style} className="InputGeneral"/>
         </>
     )
 }
