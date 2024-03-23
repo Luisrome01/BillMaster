@@ -20,7 +20,7 @@ const Facturacion = () => {
 							</div>
 
 							<div className="FacturaNombre">
-								<InputDiferente name="Nombre:" color="#D9D9D9" width="50%" placeholder="Jhon Doe" />
+								<InputDiferente name="Nombre:" color="#D9D9D9" width="50%" placeholder="ej. Jhon Doe" />
 							</div>
 						</div>
 						<div className="FacturaDireccion">
@@ -29,13 +29,13 @@ const Facturacion = () => {
 								name="Direccion:"
 								color="#D9D9D9"
 								width="70%"
-								placeholder="Avenida Río Caura Torre Humboldt
+								placeholder="ej. Avenida Río Caura Torre Humboldt
 Prados del Este Piso 20 Oficina 20-06"
 							/>
 						</div>
 						<div className="FacturaRif-BotonCrear">
 							<div className="FacturaRif">
-								<InputDiferente name="Rif:" color="#D9D9D9" width="80%" placeholder="J123456789" />
+								<InputDiferente name="Rif:" color="#D9D9D9" width="80%" placeholder="ej. J123456789" />
 							</div>
 							<div className="FacturaBotonCrear">
 								<BtnGeneral img={svgAdd} text="Crear Cliente" width="165px" />

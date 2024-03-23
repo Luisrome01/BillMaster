@@ -22,7 +22,7 @@ const Login = () => {
 						<h1 className="LogSubTitle">Iniciar Sesión</h1>
 					</div>
 
-					<InputGeneral name={"Correo Electrónico"} type="text" placeholder=" Correo Electrónico" width="80%" />
+					<InputGeneral name={"Correo Electrónico"} type="text" placeholder=" ej. JubertPerez" width="80%" />
 
 					<InputGeneral name={"Contraseña"} type="password" placeholder=" Contraseña" width="80%" />
 
