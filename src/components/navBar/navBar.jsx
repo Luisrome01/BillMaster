@@ -9,9 +9,35 @@ const NavBar = ({ componenteActivo, setComponenteActivo }) => {
 	const baseLogoColor = "#A4A4A5";
 	const activeLogoColor = "#000000";
 
+	const styleHover = {
+		//background color is clearer when the mouse is over the button than when is selected
+		backgroundColor: "lightGray",
+	};
+
 	const styleSelected = {
 		backgroundColor: "#AEBBFD",
-		boxShadow: "5px 5px 10px 0px black",
+		boxShadow: "5px 5px 1px rgba(0, 0, 0, 1)",
+	};
+
+	const [componenteHover, setComponenteHover] = useState({
+		Productos: false,
+		Facturacion: false,
+		"Metodos de Pago": false,
+		"Cierre de Caja": false,
+	});
+
+	const handleMouseEnter = (componente) => {
+		setComponenteHover((prevHover) => ({
+			...prevHover,
+			[componente]: true,
+		}));
+	};
+
+	const handleMouseLeave = (componente) => {
+		setComponenteHover((prevHover) => ({
+			...prevHover,
+			[componente]: false,
+		}));
 	};
 
 	return (
@@ -21,7 +47,14 @@ const NavBar = ({ componenteActivo, setComponenteActivo }) => {
 				<h1 className="NavBarTitle">Bill Master</h1>
 			</div>
 			<div className="NavContent">
-				<div className="nav-link" onClick={() => setComponenteActivo("Productos")}>
+				<h2 style={{ color: "#A4A4A5" }}>MENU PRINCIPAL</h2>
+				<div
+					className="nav-link"
+					onClick={() => setComponenteActivo("Productos")}
+					style={componenteActivo === "Productos" ? styleSelected : componenteHover.Productos ? styleHover : {}}
+					onMouseEnter={() => handleMouseEnter("Productos")}
+					onMouseLeave={() => handleMouseLeave("Productos")}
+				>
 					<svg width="24" height="23" viewBox="0 0 24 23" fill="none" xmlns="http://www.w3.org/2000/svg" className="nav-link-img">
 						<path
 							d="M22.273 7.86802L21.9971 5.23267C21.5975 2.35948 20.2941 1.18927 17.5065 1.18927L15.2613 1.18927H13.8532L10.961 1.18927H9.55294L7.2696 1.18927C4.47252 1.18927 3.17863 2.35948 2.76954 5.26121L2.51266 7.87753C2.41752 8.89552 2.69342 9.88496 3.2928 10.6556C4.01585 11.5975 5.12898 12.1302 6.36579 12.1302C7.56454 12.1302 8.71572 11.5309 9.43877 10.57C10.0857 11.5309 11.1893 12.1302 12.4166 12.1302C13.6439 12.1302 14.719 11.5594 15.3754 10.608C16.108 11.5499 17.2402 12.1302 18.4199 12.1302C19.6852 12.1302 20.8269 11.5689 21.5404 10.5795C22.1113 9.81837 22.3681 8.85746 22.273 7.86802Z"
@@ -36,9 +69,15 @@ const NavBar = ({ componenteActivo, setComponenteActivo }) => {
 							fill={componenteActivo === "Productos" ? activeLogoColor : baseLogoColor}
 						/>
 					</svg>
-					<h2 style={{ color: componenteActivo === "Productos" ? activeLogoColor : baseLogoColor }}>Productos</h2>
+					<h3 style={{ color: componenteActivo === "Productos" ? activeLogoColor : baseLogoColor }}>Productos</h3>
 				</div>
-				<div className="nav-link" onClick={() => setComponenteActivo("Facturacion")}>
+				<div
+					className="nav-link"
+					onClick={() => setComponenteActivo("Facturacion")}
+					style={componenteActivo === "Facturacion" ? styleSelected : componenteHover.Facturacion ? styleHover : {}}
+					onMouseEnter={() => handleMouseEnter("Facturacion")}
+					onMouseLeave={() => handleMouseLeave("Facturacion")}
+				>
 					<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="nav-link-img">
 						<path
 							d="M21.764 21.4306H2.73625C2.34618 21.4306 2.02271 21.1072 2.02271 20.7171C2.02271 20.327 2.34618 20.0035 2.73625 20.0035H21.764C22.1541 20.0035 22.4776 20.327 22.4776 20.7171C22.4776 21.1072 22.1541 21.4306 21.764 21.4306Z"
@@ -57,9 +96,15 @@ const NavBar = ({ componenteActivo, setComponenteActivo }) => {
 							fill={componenteActivo === "Facturacion" ? activeLogoColor : baseLogoColor}
 						/>
 					</svg>
-					<h2 style={{ color: componenteActivo === "Facturacion" ? activeLogoColor : baseLogoColor }}>Facturación</h2>
+					<h3 style={{ color: componenteActivo === "Facturacion" ? activeLogoColor : baseLogoColor }}>Facturación</h3>
 				</div>
-				<div className="nav-link" onClick={() => setComponenteActivo("Metodos de Pago")}>
+				<div
+					className="nav-link"
+					onClick={() => setComponenteActivo("Metodos de Pago")}
+					style={componenteActivo === "Metodos de Pago" ? styleSelected : componenteHover["Metodos de Pago"] ? styleHover : {}}
+					onMouseEnter={() => handleMouseEnter("Metodos de Pago")}
+					onMouseLeave={() => handleMouseLeave("Metodos de Pago")}
+				>
 					<svg width="24" height="23" viewBox="0 0 24 23" fill="none" xmlns="http://www.w3.org/2000/svg" className="nav-link-img">
 						<path
 							d="M21.7643 14.271C21.7643 17.9529 18.7864 20.9307 15.1046 20.9307L16.1035 19.2658"
@@ -92,9 +137,15 @@ const NavBar = ({ componenteActivo, setComponenteActivo }) => {
 							fill={componenteActivo === "Metodos de Pago" ? activeLogoColor : baseLogoColor}
 						/>
 					</svg>
-					<h2 style={{ color: componenteActivo === "Metodos de Pago" ? activeLogoColor : baseLogoColor }}>Métodos de Pago</h2>
+					<h3 style={{ color: componenteActivo === "Metodos de Pago" ? activeLogoColor : baseLogoColor }}>Métodos de Pago</h3>
 				</div>
-				<div className="nav-link" onClick={() => setComponenteActivo("Cierre de Caja")}>
+				<div
+					className="nav-link"
+					onClick={() => setComponenteActivo("Cierre de Caja")}
+					style={componenteActivo === "Cierre de Caja" ? styleSelected : componenteHover["Cierre de Caja"] ? styleHover : {}}
+					onMouseEnter={() => handleMouseEnter("Cierre de Caja")}
+					onMouseLeave={() => handleMouseLeave("Cierre de Caja")}
+				>
 					<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="nav-link-img">
 						<path
 							d="M16.7697 3.88704V2.40287C16.7697 2.0128 16.4462 1.68933 16.0561 1.68933C15.6661 1.68933 15.3426 2.0128 15.3426 2.40287V3.82996H9.15858V2.40287C9.15858 2.0128 8.8351 1.68933 8.44504 1.68933C8.05497 1.68933 7.73149 2.0128 7.73149 2.40287V3.88704C5.16274 4.12489 3.91642 5.65662 3.72615 7.93044C3.70712 8.20634 3.93545 8.43468 4.20184 8.43468H20.2993C20.5752 8.43468 20.8036 8.19683 20.775 7.93044C20.5848 5.65662 19.3384 4.12489 16.7697 3.88704Z"
@@ -109,7 +160,7 @@ const NavBar = ({ componenteActivo, setComponenteActivo }) => {
 							fill={componenteActivo === "Cierre de Caja" ? activeLogoColor : baseLogoColor}
 						/>
 					</svg>
-					<h2 style={{ color: componenteActivo === "Cierre de Caja" ? activeLogoColor : baseLogoColor }}>Cierre de Caja</h2>
+					<h3 style={{ color: componenteActivo === "Cierre de Caja" ? activeLogoColor : baseLogoColor }}>Cierre de Caja</h3>
 				</div>
 			</div>
 			<div className="nav-last-link">

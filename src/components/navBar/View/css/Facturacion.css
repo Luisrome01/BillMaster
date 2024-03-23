@@ -1,136 +1,129 @@
-.FacturaContainer{
-display: flex;
-flex-direction: column;
-width: 100%;
-height: 85vh;
-background-color:#FFFF;
+.FacturaContainer {
+	display: flex;
+	flex-direction: column;
+	width: 100%;
+	height: 85vh;
+	background-color: #ffff;
+	position: relative;
 }
 
-.FacturaHeaderContainer{
-    flex-basis: 15%;
-    width: 100%;
-    
-    align-items: center;
-    display: flex;
+.FacturaHeaderContainer {
+	flex-basis: 15%;
+	width: 100%;
+	align-items: center;
+	display: flex;
 }
 
-.FacturaInputsContainer{
-    flex-basis: 25%;
-    width: 100%;
-   
-    display: flex;
-    flex-direction: row;
+.FacturaInputsContainer {
+	flex-basis: 25%;
+	width: 100%;
+
+	display: flex;
+	flex-direction: row;
 }
 
-.FacturaTableContainer{
-    flex-basis: 45%;
-    width: 100%;
-    
+.FacturaTableContainer {
+	flex-basis: 45%;
+	width: 100%;
 }
 
-.FacturaCheckoutContainer{
-    flex-basis: 15%;
-    width: 100%;
-  
+.FacturaCheckoutContainer {
+	flex-basis: 15%;
+	width: 100%;
 }
-
-
-
-
-
-
 
 .FacturaInputsEntre2 {
-    display: flex;
-    flex-direction: row;
-    width: 100%;
-    
-    /* background-color: red; */
-  
+	display: flex;
+	flex-direction: row;
+	width: 100%;
 }
 
-.FacturaInput1{
-    flex-basis: 55%;
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    /* background-color: red;  */
+.FacturaInput1 {
+	flex-basis: 70%;
+	width: 100%;
+	display: flex;
+	flex-direction: column;
 }
 
-.FacturaCedula-nombre{
-    flex-basis: 33%;
-    width: 100%;
-    display: flex;
-    flex-direction: row;
+.FacturaCedula-nombre {
+	align-items: center;
+	flex-basis: 33%;
+	width: 100%;
+	display: flex;
+	flex-direction: row;
 }
 
-.FacturaCedula{
-    flex-basis: 50%;
-    width: 100%;
-  
+.FacturaCedula {
+	margin-left: 10%;
+	flex-basis: 58%;
+	width: 100%;
 }
 
-.FacturaNombre{
-    flex-basis: 50%;
-    width: 100%;
-  
+.FacturaNombre {
+	flex-basis: 42%;
+	width: 100%;
 }
-.FacturaDireccion{
-    flex-basis: 33%;
-    width: 100%;
-  
+.FacturaDireccion {
+	margin-left: 10%;
+	flex-basis: 33%;
+	width: 100%;
+	display: flex;
+	align-items: center;
 }
-.FacturaRif-BotonCrear{
-    flex-basis: 33%;
-    width: 100%;
-    display: flex;
-    flex-direction:row;
-  
+.FacturaRif-BotonCrear {
+	align-items: center;
+	flex-basis: 33%;
+	width: 100%;
+	display: flex;
+	flex-direction: row;
 }
-.FacturaRif{
-    flex-basis: 60%;
-    width: 100%;
-  
+.FacturaRif {
+	margin-left: 10%;
+	flex-basis: 60%;
+	width: 100%;
 }
-.FacturaBotonCrear{
-    flex-basis: 40%;
-    width: 100%;
-  
+.FacturaBotonCrear {
+	flex-basis: 40%;
+	width: 100%;
 }
-.FacturaInput2{
-    flex-basis: 45%;
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    justify-items:left ;
- 
-  
+.FacturaInput2 {
+	flex-basis: 30%;
+	width: 100%;
+	display: flex;
+	flex-direction: column;
 }
-.FacturaoCodigo-buscar{
-    flex-basis: 15%;
-    width: 100%;
-    display: flex;
-  flex-direction: row;
-  
+.FacturaoCodigo-buscar {
+	flex-basis: 33%;
+	width: 100%;
+	display: flex;
+	flex-direction: row;
+	align-items: center;
 }
-.FacturaCodigo{
-    flex-basis: 50%;
-    width: 100%;
-  
+.FacturaCodigo {
+	flex-basis: 50%;
+	width: 100%;
 }
 
-.FacturaBuscar{
-    flex-basis: 50%;
-    width: 100%;
-  
+.FacturaBuscar {
+	flex-basis: 50%;
+	width: 100%;
 }
-.FacturaCantidad{
-    width: 100%;
-  
+
+.FacturaSearch {
+	margin-left: 20px;
+	background-color: transparent;
+	border: none;
 }
-.FacturaBotonAgregar{
-    width: 100%;
-    margin-left: 50px;
-  
+
+.FacturaCantidad {
+	display: flex;
+	align-items: center;
+	flex-basis: 33%;
+	width: 100%;
+}
+.FacturaBotonAgregar {
+	display: flex;
+	align-items: center;
+	flex-basis: 33%;
+	width: 100%;
 }
