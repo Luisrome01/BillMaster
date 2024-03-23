@@ -17,7 +17,7 @@ const MainView = () => {
 	return (
 		<div className="MainContainer">
 			<div className="MainNavContainer">
-				<NavBar setComponenteActivo={setComponenteActivo} />
+				<NavBar componenteActivo={componenteActivo} setComponenteActivo={setComponenteActivo} />
 			</div>
 			<div className="MainContentContainer">
 				<div className="MainContentTop">
