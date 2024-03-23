@@ -22,9 +22,11 @@ const MainView = () => {
 			<div className="MainContentContainer">
 				<div className="MainContentTop">
 					<h1 className="MainTitle">{componenteActivo}</h1>
-					<BtnGeneral text="Bienvenido Empleado" onHoverColor="#AEBBFD" className="MainUserButton" width="200px" img={UserRound} />{" "}
-					{/* cambiar */}
-					<BtnGeneral text="Logout" color="#ff6060" onHoverColor="#c54444" className="MainLogoutButton" img={LogoutSVG} />
+
+					<div className="MainUserDiv">
+						<img src={UserRound}></img>
+						<p style={{ fontWeight: "bold" }}>Bienvenido Usuario</p>
+					</div>
 				</div>
 				<div className="FactContentBottom">
 					{componenteActivo === "Facturacion" && <Facturacion />}

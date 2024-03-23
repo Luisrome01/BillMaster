@@ -55,6 +55,7 @@ html {
 	background-repeat: no-repeat;
 	border-radius: 5px;
 }
+
 .MainContentBottom {
 	flex-basis: 85%;
 	background-color: #ffffff;
@@ -63,6 +64,18 @@ html {
 .MainTitle {
 	color: black;
 	font-weight: bold;
-	flex-basis: 60%;
+	flex-basis: 70%;
 	margin-left: 5%;
+}
+
+.MainUserDiv {
+	flex-basis: 20%;
+	display: grid;
+	grid-template-columns: 1fr 5fr;
+	justify-items: center;
+	align-items: center;
+	height: 45px;
+	background-color: #aebbfd;
+	border-radius: 10px;
+	box-shadow: 0px 4px 4px rgba(0, 0, 0, 1);
 }

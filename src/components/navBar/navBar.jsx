@@ -164,8 +164,8 @@ const NavBar = ({ componenteActivo, setComponenteActivo }) => {
 				</div>
 			</div>
 			<div className="nav-last-link">
-				<Link to="/">
-					<BtnGeneral text="Logout" color="#ff6060" onHoverColor="#c54444" className="MainLogoutButton" img={logoutLogo} />
+				<Link to="/" style={{ textDecoration: "none" }}>
+					<BtnGeneral text="Logout" color="#ff6060" onHoverColor="#c54444" className="NavBarLogout" img={logoutLogo} />
 				</Link>
 			</div>
 		</nav>

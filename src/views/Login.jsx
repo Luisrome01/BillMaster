@@ -26,7 +26,7 @@ const Login = () => {
 
 					<InputGeneral name={"Contraseña"} type="password" placeholder=" Contraseña" width="80%" />
 
-					<Link to="/main">
+					<Link to="/main" style={{ textDecoration: "none" }}>
 						<BtnGeneral text="Ingresar" handleClick={() => {}} img={image} />
 					</Link>
 				</div>

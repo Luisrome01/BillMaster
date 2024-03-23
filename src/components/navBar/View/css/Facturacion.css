@@ -9,38 +9,26 @@
 
 .FacturaHeaderContainer {
 	flex-basis: 15%;
-	width: 100%;
+	margin-left: 7%;
 	align-items: center;
 	display: flex;
 }
 
-.FacturaInputsContainer {
-	flex-basis: 25%;
-	width: 100%;
-
-	display: flex;
-	flex-direction: row;
-}
-
 .FacturaTableContainer {
-	flex-basis: 45%;
-	width: 100%;
+	align-self: center;
 }
 
 .FacturaCheckoutContainer {
-	flex-basis: 15%;
-	width: 100%;
+	align-self: normal;
 }
 
 .FacturaInputsEntre2 {
-	display: flex;
-	flex-direction: row;
-	width: 100%;
+	flex-basis: 25%;
+	display: grid;
+	grid-template-columns: 70% 30%;
 }
 
 .FacturaInput1 {
-	flex-basis: 70%;
-	width: 100%;
 	display: flex;
 	flex-direction: column;
 }
@@ -48,7 +36,6 @@
 .FacturaCedula-nombre {
 	align-items: center;
 	flex-basis: 33%;
-	width: 100%;
 	display: flex;
 	flex-direction: row;
 }
@@ -56,12 +43,10 @@
 .FacturaCedula {
 	margin-left: 10%;
 	flex-basis: 58%;
-	width: 100%;
 }
 
 .FacturaNombre {
 	flex-basis: 42%;
-	width: 100%;
 }
 .FacturaDireccion {
 	margin-left: 10%;
@@ -73,40 +58,32 @@
 .FacturaRif-BotonCrear {
 	align-items: center;
 	flex-basis: 33%;
-	width: 100%;
 	display: flex;
 	flex-direction: row;
 }
 .FacturaRif {
 	margin-left: 10%;
 	flex-basis: 60%;
-	width: 100%;
 }
 .FacturaBotonCrear {
 	flex-basis: 40%;
-	width: 100%;
 }
 .FacturaInput2 {
-	flex-basis: 30%;
-	width: 100%;
 	display: flex;
 	flex-direction: column;
 }
 .FacturaoCodigo-buscar {
 	flex-basis: 33%;
-	width: 100%;
 	display: flex;
 	flex-direction: row;
 	align-items: center;
 }
 .FacturaCodigo {
 	flex-basis: 50%;
-	width: 100%;
 }
 
 .FacturaBuscar {
 	flex-basis: 50%;
-	width: 100%;
 }
 
 .FacturaSearch {
@@ -119,11 +96,9 @@
 	display: flex;
 	align-items: center;
 	flex-basis: 33%;
-	width: 100%;
 }
 .FacturaBotonAgregar {
 	display: flex;
 	align-items: center;
 	flex-basis: 33%;
-	width: 100%;
 }
