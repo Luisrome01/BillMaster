@@ -1,0 +1,33 @@
+span {
+	color: black;
+	font-weight: bold;
+}
+
+
+input {
+	color: black;
+	font-weight: bold;
+	border: none;
+	outline: none;
+
+}
+.InputDiferente {
+	height: 30px;
+	transition: 0.25s;
+	background: rgba(174, 187, 253, 0.25);
+	border-radius: 10px;
+	border: none;
+    flex-basis: 80%;
+}
+
+.InputDiferente:focus {
+	transition: 0.25s;
+	background: rgba(174, 187, 253, 0.75);
+}
+
+.InputDContainer{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    
+}
