@@ -20,30 +20,27 @@ const MetodosPago = () => {
 			<div className="MetodosContainer">
 				<h1 className="MetodosHeaderContainer">Agregar metodos de pago</h1>
 
-					<div className="MetodosInput">
-						<div className="MetodoMetododPago">
-							<div className="MetodoMetodo">
-								<InputMetodosPago name="Metodo de pago:" color="#D9D9D9" width="200px" />
-							</div>
-
-							<div className="MetodoBanco">
-							<InputBanco name="Metodo de pago:" color="#D9D9D9" width="200px" />
-							</div>
+				<div className="MetodosInput">
+					<div className="MetodoMetododPago">
+						<div className="MetodoMetodo">
+							<InputMetodosPago name="Metodo de pago:" color="#D9D9D9" width="200px" />
 						</div>
-						<div className="MetodoMonto-BotonAgregar">
-							<div className="MetodoMonto">
-								<InputDiferente name="Monto:" color="#D9D9D9" width="15%"  />
-							</div>
-							<div className="MetodoBotonAgregar">
-								<BtnGeneral img={svgAdd} text="Agregar Pago" width="165px" />
-							</div>
+
+						<div className="MetodoBanco">
+							<InputBanco name="Metodo de pago:" color="#D9D9D9" width="200px" />
 						</div>
 					</div>
-			
-
-				<div className="FacturaTableContainer">
-					<ProductTable width="90%" height="85%" onTotalChange={actualizarMontoTotal} />
+					<div className="MetodoMonto-BotonAgregar">
+						<div className="MetodoMonto">
+							<InputDiferente name="Monto:" color="#D9D9D9" width="15%" />
+						</div>
+						<div className="MetodoBotonAgregar">
+							<BtnGeneral img={svgAdd} text="Agregar Pago" width="165px" />
+						</div>
+					</div>
 				</div>
+
+				<div className="FacturaTableContainer">{/* <ProductTable width="90%" height="85%" onTotalChange={actualizarMontoTotal} /> */}</div>
 
 				<div className="FacturaCheckoutContainer">
 					<div style={{ display: "flex", flexDirection: "column" }}>
