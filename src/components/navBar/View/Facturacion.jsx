@@ -52,7 +52,6 @@ Prados del Este Piso 20 Oficina 20-06"
 								<InputDiferente name="Codigo:" color="#D9D9D9" />
 							</div>
 							<div className="FacturaBuscar">
-								{/* crear boton de la lupa de busqueda */}
 								<button className="FacturaSearch">
 									<img src={svgSearch}></img>
 								</button>
@@ -67,13 +66,28 @@ Prados del Este Piso 20 Oficina 20-06"
 					</div>
 				</div>
 
-				<div className="FacturaTableContainer"></div>
+				<div className="FacturaTableContainer">
+					{/* placeholder mientras hacemos la tabla */}
+					<div
+						style={{
+							width: "90%",
+							height: "85%",
+							alignSelf: "center",
+							backgroundColor: "white",
+							border: "1.42917px solid #000000",
+							boxSizing: "border-box",
+							boxShadow: "3.81111px 5.71667px 0px #000000",
+							borderRadius: "22.8667px",
+						}}
+					></div>
+				</div>
+
 				<div className="FacturaCheckoutContainer">
 					<div style={{ display: "flex", flexDirection: "column" }}>
 						<p style={{ position: "relative", marginLeft: "auto", fontSize: "18px" }}>Total:</p>
 						<p style={{ position: "relative", marginLeft: "auto", fontSize: "25.4331px", fontWeight: "bold" }}>$ {monto}</p>
 					</div>
-					<BtnGeneral text="Checkout" width="200px" color="#ff6060" onHoverColor="#c54444" img={cartSVG} />
+					<BtnGeneral text="Checkout" width="140px" color="#ff6060" onHoverColor="#c54444" img={cartSVG} />
 				</div>
 			</div>
 		</>

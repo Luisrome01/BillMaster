@@ -3,12 +3,13 @@ import "./css/InputDiferente.css";
 
 const InputDiferente = ({ type, placeholder, width, height, color, borderRadius, shadow, name, flexBasis }) => {
 	const style = {
-		height: height ? height : "30px",
+		height: height ? height : "32px",
 		backgroundColor: color ? color : "rgba(174, 187, 253, 0.25)",
 		borderRadius: borderRadius ? borderRadius : "10px",
 		boxShadow: shadow,
 		width: width ? width : undefined,
 	};
+
 	return (
 		<>
 			<div className="InputDContainer" style={{ flexBasis: flexBasis }}>
