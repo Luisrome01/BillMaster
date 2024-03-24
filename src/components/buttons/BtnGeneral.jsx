@@ -26,10 +26,10 @@ const BtnGeneral = ({ text, handleClick, width, height, color, onHoverColor, bor
 
 	const style = {
 		width: width ? width : "110px",
-		height: height ? height : "45px",
+		height: height ? height : "46px",
 		backgroundColor: color ? color : "#AEBBFD",
-		borderRadius: borderRadius ? borderRadius : "10px",
-		boxShadow: shadow ? shadow : "0px 4px 4px rgba(0, 0, 0, 1)",
+		borderRadius: borderRadius ? borderRadius : "11.4167px",
+		boxShadow: shadow ? shadow : "1.90278px 3.80556px 0px #000000",
 		transition: "background-color 0.3s, transform 0.1s, box-shadow 0.1s",
 
 		//obscurece el color del boton cuando el mouse esta sobre el boton

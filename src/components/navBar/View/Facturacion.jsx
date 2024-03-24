@@ -5,8 +5,11 @@ import InputDinamico from "../../../components/inputs/InputDinamico";
 import InputDiferente from "../../../components/inputs/InputDiferente";
 import svgAdd from "../../../assets/svg_add.svg";
 import svgSearch from "../../../assets/SearchSVG.svg";
+import cartSVG from "../../../assets/marketKart.svg";
 
 const Facturacion = () => {
+	const monto = "0.00";
+
 	return (
 		<>
 			<div className="FacturaContainer">
@@ -65,7 +68,13 @@ Prados del Este Piso 20 Oficina 20-06"
 				</div>
 
 				<div className="FacturaTableContainer"></div>
-				<div className="FacturaCheckoutContainer"></div>
+				<div className="FacturaCheckoutContainer">
+					<div style={{ display: "flex", flexDirection: "column" }}>
+						<p style={{ position: "relative", marginLeft: "auto", fontSize: "18px" }}>Total:</p>
+						<p style={{ position: "relative", marginLeft: "auto", fontSize: "25.4331px", fontWeight: "bold" }}>$ {monto}</p>
+					</div>
+					<BtnGeneral text="Checkout" width="200px" color="#ff6060" onHoverColor="#c54444" img={cartSVG} />
+				</div>
 			</div>
 		</>
 	);
