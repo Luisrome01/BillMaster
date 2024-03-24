@@ -1,5 +1,5 @@
 import "./css/Facturacion.css";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import BtnGeneral from "../../../components/buttons/BtnGeneral";
 import InputDinamico from "../../../components/inputs/InputDinamico";
 import InputDiferente from "../../../components/inputs/InputDiferente";
@@ -9,10 +9,82 @@ import cartSVG from "../../../assets/marketKart.svg";
 import ProductTable from "../../tables/productTable";
 
 const Facturacion = () => {
+	const [listProductos, setListProductos] = useState([]);
+
+	const eliminarProducto = (index) => {
+		const updatedProductos = [...listProductos];
+		updatedProductos.splice(index, 1);
+		setListProductos(updatedProductos);
+	};
+
 	const [montoTotal, setMontoTotal] = useState("0.00");
 
-	const actualizarMontoTotal = (nuevoMonto) => {
-		setMontoTotal(nuevoMonto);
+	useEffect(() => {
+		let total = 0;
+		listProductos.forEach((element) => {
+			total += parseFloat(element.total);
+		});
+		setMontoTotal(total.toFixed(2));
+	}, [listProductos]);
+
+	const [getCantidad, setCantidad] = useState(1);
+
+	const actualizarCantidad = (nuevaCantidad) => {
+		setCantidad(nuevaCantidad);
+	};
+
+	const [getCodigo, setCodigo] = useState("");
+
+	const actualizarCodigo = (nuevoCodigo) => {
+		setCodigo(nuevoCodigo);
+	};
+
+	useEffect(() => {}, [listProductos]);
+
+	const addProduct = () => {
+		fetch("/src/json/productos.json")
+			.then((response) => {
+				if (!response.ok) {
+					throw new Error("Error fetching data");
+				}
+				return response.json();
+			})
+			.then((data) => {
+				let product = data[getCodigo];
+				if (product) {
+					const index = listProductos.findIndex((element) => element.codigo === getCodigo);
+					if (index !== -1) {
+						if (parseFloat(getCantidad) <= 0) {
+							alert("La cantidad debe ser mayor a 0");
+							return;
+						}
+						const updatedProductos = [...listProductos];
+						updatedProductos[index].cantidad += parseFloat(getCantidad);
+						updatedProductos[index].total =
+							parseFloat(updatedProductos[index].cantidad) *
+							(parseFloat(updatedProductos[index].precio) + parseFloat(updatedProductos[index].iva));
+						setListProductos(updatedProductos);
+					} else {
+						if (parseFloat(getCantidad) <= 0) {
+							alert("La cantidad debe ser mayor a 0");
+							return;
+						}
+						setListProductos([
+							...listProductos,
+							{
+								codigo: getCodigo,
+								descripcion: product.name,
+								cantidad: parseFloat(getCantidad),
+								precio: parseFloat(product.price),
+								iva: parseFloat(product.IVA),
+								total: parseFloat(product.total) * parseFloat(getCantidad),
+							},
+						]);
+					}
+				} else {
+					alert("Producto no encontrado");
+				}
+			});
 	};
 
 	return (
@@ -54,7 +126,7 @@ Prados del Este Piso 20 Oficina 20-06"
 					<div className="FacturaInput2">
 						<div className="FacturaoCodigo-buscar">
 							<div className="FacturaCodigo">
-								<InputDiferente name="Codigo:" color="#D9D9D9" />
+								<InputDiferente name="Codigo:" color="#D9D9D9" onChange={actualizarCodigo} />
 							</div>
 							<div className="FacturaBuscar">
 								<button className="FacturaSearch">
@@ -63,16 +135,23 @@ Prados del Este Piso 20 Oficina 20-06"
 							</div>
 						</div>
 						<div className="FacturaCantidad">
-							<InputDiferente type="number" name="Cantidad:" color="#D9D9D9" width="80px" />
+							<InputDiferente
+								type="number"
+								name="Cantidad:"
+								color="#D9D9D9"
+								width="80px"
+								placeholder="1"
+								onChange={actualizarCantidad}
+							/>
 						</div>
 						<div className="FacturaBotonAgregar">
-							<BtnGeneral img={svgAdd} text="Agregar Producto" width="200px" />
+							<BtnGeneral img={svgAdd} text="Agregar Producto" width="200px" handleClick={addProduct} />
 						</div>
 					</div>
 				</div>
 
 				<div className="FacturaTableContainer">
-					<ProductTable width="90%" height="85%" onTotalChange={actualizarMontoTotal} />
+					<ProductTable width="90%" height="85%" rows={listProductos} eliminarProducto={eliminarProducto} />
 				</div>
 
 				<div className="FacturaCheckoutContainer">
