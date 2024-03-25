@@ -6,7 +6,6 @@ import InputBanco from "../../../components/inputs/InputBanco";
 import InputDiferente from "../../../components/inputs/InputDiferente";
 import svgAdd from "../../../assets/svg_add.svg";
 import cartSVG from "../../../assets/marketKart.svg";
-import ProductTable from "../../tables/productTable";
 
 const MetodosPago = () => {
 	const [montoTotal, setMontoTotal] = useState("0.00");
@@ -23,13 +22,14 @@ const MetodosPago = () => {
 				<div className="MetodosInput">
 					<div className="MetodoMetododPago">
 						<div className="MetodoMetodo">
-							<InputMetodosPago name="Metodo de pago:" color="#D9D9D9" width="200px" />
+							<InputMetodosPago name="Metodo de pago:" color="#D9D9D9" width={"150px"} padding={"5px"} boderRadius={"10px"} height={"20%"}/>
 						</div>
 
 						<div className="MetodoBanco">
-							<InputBanco name="Metodo de pago:" color="#D9D9D9" width="200px" />
+							<InputBanco name="Metodo de pago:" color="#D9D9D9" width={"100px"} padding={"5px"} boderRadius={"10px"} height={"20%"}/>
 						</div>
 					</div>
+
 					<div className="MetodoMonto-BotonAgregar">
 						<div className="MetodoMonto">
 							<InputDiferente name="Monto:" color="#D9D9D9" width="15%" />
@@ -38,6 +38,7 @@ const MetodosPago = () => {
 							<BtnGeneral img={svgAdd} text="Agregar Pago" width="165px" />
 						</div>
 					</div>
+					
 				</div>
 
 				<div className="FacturaTableContainer">{/* <ProductTable width="90%" height="85%" onTotalChange={actualizarMontoTotal} /> */}</div>
