@@ -1,0 +1,64 @@
+{
+	"data": [
+		{
+			"name": "Jose Chacon",
+			"ci": "30310209",
+			"direccion": "Milagro Norte villa Oasys Country 2",
+			"rif": "V-12345678"
+		},
+		{
+			"name": "Luis Romero",
+			"ci": "30123456",
+			"direccion": "Fuerzas Armadas Lago Country 2",
+			"rif": "V-12345678"
+		},
+		{
+			"name": "Alejandro Amesti",
+			"ci": "30123456",
+			"direccion": "Calle 1 Av 2 Sector 3",
+			"rif": "V-12345678"
+		},
+		{
+			"name": "Misael Reverol",
+			"ci": "30123456",
+			"direccion": "Calle 1 Av 2 Sector 3",
+			"rif": "V-12345678"
+		},
+		{
+			"name": "Marcos Vejega",
+			"ci": "1123456",
+			"direccion": "Calle 1 Av 2 Sector 3",
+			"rif": "V-12345678"
+		},
+		{
+			"name": "Maria Fernanda",
+			"ci": "30123456",
+			"direccion": "Calle 1 Av 2 Sector 3",
+			"rif": "V-12345678"
+		},
+		{
+			"name": "Jubert Perez",
+			"ci": "30123456",
+			"direccion": "Calle 1 Av 2 Sector 3",
+			"rif": "V-12345678"
+		},
+		{
+			"name": "Pedro Gonzales",
+			"pasaporte": "ZAB000254",
+			"direccion": "Calle 1 Av 2 Sector 3",
+			"rif": "V-12345678"
+		},
+		{
+			"name": "Juan Fernandez",
+			"idExtranjera": "30123456",
+			"direccion": "Calle 1 Av 2 Sector 3",
+			"rif": "V-12345678"
+		},
+		{
+			"name": "Antonio Villasmil",
+			"ci": "30310209",
+			"direccion": "Milagro Norte villa Oasys Country 2",
+			"rif": "V-12345678"
+		}
+	]
+}

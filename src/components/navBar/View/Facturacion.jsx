@@ -28,16 +28,7 @@ const Facturacion = () => {
 	}, [listProductos]);
 
 	const [getCantidad, setCantidad] = useState(1);
-
-	const actualizarCantidad = (nuevaCantidad) => {
-		setCantidad(nuevaCantidad);
-	};
-
 	const [getCodigo, setCodigo] = useState("");
-
-	const actualizarCodigo = (nuevoCodigo) => {
-		setCodigo(nuevoCodigo);
-	};
 
 	useEffect(() => {}, [listProductos]);
 
@@ -64,6 +55,8 @@ const Facturacion = () => {
 							parseFloat(updatedProductos[index].cantidad) *
 							(parseFloat(updatedProductos[index].precio) + parseFloat(updatedProductos[index].iva));
 						setListProductos(updatedProductos);
+						setValorCodigo("");
+						setValorCantidad("");
 					} else {
 						if (parseFloat(getCantidad) <= 0) {
 							alert("La cantidad debe ser mayor a 0");
@@ -80,11 +73,143 @@ const Facturacion = () => {
 								total: parseFloat(product.total) * parseFloat(getCantidad),
 							},
 						]);
+						setCodigo("");
+						setCantidad(1);
+						setValorCodigo("");
+						setValorCantidad("");
 					}
 				} else {
 					alert("Producto no encontrado");
 				}
 			});
+	};
+
+	const [getIdentificacion, setIdentificacion] = useState("Cedula");
+	const [getValorIdentificacion, setValorIdentificacion] = useState("");
+	const [getClientes, setClientes] = useState([]);
+	const [getValorNombre, setValorNombre] = useState("");
+	const [getValorDireccion, setValorDireccion] = useState("");
+	const [getValorRif, setValorRif] = useState("");
+	const [getValorCodigo, setValorCodigo] = useState("");
+	const [getValorCantidad, setValorCantidad] = useState("");
+	const [getName, setName] = useState("");
+	const [getDireccion, setDireccion] = useState("");
+	const [getRif, setRif] = useState("");
+	const [disabledInput, setDisabledInput] = useState(false);
+
+	function cleanInputs() {
+		setValorNombre("");
+		setValorDireccion("");
+		setValorRif("");
+	}
+
+	useEffect(() => {
+		fetch("/src/json/clientes.json")
+			.then((response) => {
+				if (!response.ok) {
+					throw new Error("Error fetching data");
+				}
+				return response.json();
+			})
+			.then((data) => {
+				setClientes(data.data);
+			});
+	}, []);
+
+	const handleOnBlur = () => {
+		switch (getIdentificacion) {
+			case "Cedula":
+				const client = getClientes.find((element) => element.ci === getValorIdentificacion);
+				if (client) {
+					setDisabledInput(true);
+					setValorNombre(client.name);
+					setValorDireccion(client.direccion);
+					setValorRif(client.rif);
+				} else {
+					setDisabledInput(false);
+					cleanInputs();
+				}
+				break;
+			case "Pasaporte":
+				const client2 = getClientes.find((element) => element.pasaporte === getValorIdentificacion);
+				if (client2) {
+					setDisabledInput(true);
+					setValorNombre(client2.name);
+					setValorDireccion(client2.direccion);
+					setValorRif(client2.rif);
+				} else {
+					setDisabledInput(false);
+					cleanInputs();
+				}
+				break;
+			case "ID Extranjero":
+				const client3 = getClientes.find((element) => element.idExtranjera === getValorIdentificacion);
+				if (client3) {
+					setDisabledInput(true);
+					setValorNombre(client3.name);
+					setValorDireccion(client3.direccion);
+					setValorRif(client3.rif);
+				} else {
+					setDisabledInput(false);
+					cleanInputs();
+				}
+				break;
+		}
+	};
+
+	const createClient = () => {
+		if (getValorIdentificacion === "" || getDireccion === "" || getRif === "" || getName === "") {
+			alert("Por favor llene todos los campos");
+			return;
+		}
+		// check if client already exists
+		const client = getClientes.find((element) => element.ci === getValorIdentificacion);
+		if (client) {
+			alert("Cliente ya existe");
+			cleanInputs();
+			return;
+		}
+		switch (getIdentificacion) {
+			case "Cedula":
+				setClientes([
+					...getClientes,
+					{
+						ci: getValorIdentificacion,
+						name: getName,
+						direccion: getDireccion,
+						rif: getRif,
+					},
+				]);
+
+				break;
+			case "Pasaporte":
+				setClientes([
+					...getClientes,
+					{
+						pasaporte: getValorIdentificacion,
+						name: getName,
+						direccion: getDireccion,
+						rif: getRif,
+					},
+				]);
+				break;
+			case "ID Extranjero":
+				setClientes([
+					...getClientes,
+					{
+						idExtranjera: getValorIdentificacion,
+						name: getName,
+						direccion: getDireccion,
+						rif: getRif,
+					},
+				]);
+				break;
+		}
+		setValorDireccion(getDireccion);
+		setValorNombre(getName);
+		setValorRif(getRif);
+		setDisabledInput(true);
+		alert("Cliente creado con exito");
 	};
 
 	return (
@@ -96,29 +221,55 @@ const Facturacion = () => {
 					<div className="FacturaInput1">
 						<div className="FacturaCedula-nombre">
 							<div className="FacturaCedula">
-								<InputDinamico name="Cedula o Pasaporte:" color="#D9D9D9" width="200px" />
+								<InputDinamico
+									name="Cedula o Pasaporte:"
+									color="#D9D9D9"
+									width="200px"
+									onBlur={handleOnBlur}
+									onTypeChange={(newType) => setIdentificacion(newType)}
+									onValueChange={(newValue) => setValorIdentificacion(newValue)}
+								/>
 							</div>
 
 							<div className="FacturaNombre">
-								<InputDiferente name="Nombre:" color="#D9D9D9" width="50%" placeholder="ej. Jhon Doe" />
+								<InputDiferente
+									value={getValorNombre}
+									name="Nombre:"
+									color="#D9D9D9"
+									width="50%"
+									placeholder="ej. Jhon Doe"
+									onChange={(newName) => setName(newName)}
+									disabled={disabledInput}
+								/>
 							</div>
 						</div>
 						<div className="FacturaDireccion">
 							<InputDiferente
-								flexBasis="100%"
 								name="Direccion:"
+								value={getValorDireccion}
+								flexBasis="100%"
 								color="#D9D9D9"
 								width="70%"
 								placeholder="ej. Avenida Río Caura Torre Humboldt
 Prados del Este Piso 20 Oficina 20-06"
+								disabled={disabledInput}
+								onChange={(newDireccion) => setDireccion(newDireccion)}
 							/>
 						</div>
 						<div className="FacturaRif-BotonCrear">
 							<div className="FacturaRif">
-								<InputDiferente name="Rif:" color="#D9D9D9" width="80%" placeholder="ej. J123456789" />
+								<InputDiferente
+									value={getValorRif}
+									name="Rif:"
+									color="#D9D9D9"
+									width="80%"
+									placeholder="ej. J123456789"
+									disabled={disabledInput}
+									onChange={(newRif) => setRif(newRif)}
+								/>
 							</div>
 							<div className="FacturaBotonCrear">
-								<BtnGeneral img={svgAdd} text="Crear Cliente" width="165px" />
+								<BtnGeneral img={svgAdd} text="Crear Cliente" width="165px" handleClick={createClient} />
 							</div>
 						</div>
 					</div>
@@ -126,7 +277,15 @@ Prados del Este Piso 20 Oficina 20-06"
 					<div className="FacturaInput2">
 						<div className="FacturaoCodigo-buscar">
 							<div className="FacturaCodigo">
-								<InputDiferente name="Codigo:" color="#D9D9D9" onChange={actualizarCodigo} />
+								<InputDiferente
+									value={getValorCodigo}
+									name="Codigo:"
+									color="#D9D9D9"
+									onChange={(newValue) => {
+										setCodigo(newValue);
+										setValorCodigo(newValue);
+									}}
+								/>
 							</div>
 							<div className="FacturaBuscar">
 								<button className="FacturaSearch">
@@ -136,12 +295,16 @@ Prados del Este Piso 20 Oficina 20-06"
 						</div>
 						<div className="FacturaCantidad">
 							<InputDiferente
+								value={getValorCantidad}
 								type="number"
 								name="Cantidad:"
 								color="#D9D9D9"
 								width="80px"
 								placeholder="1"
-								onChange={actualizarCantidad}
+								onChange={(newCantidad) => {
+									setCantidad(newCantidad);
+									setValorCantidad(newCantidad);
+								}}
 							/>
 						</div>
 						<div className="FacturaBotonAgregar">

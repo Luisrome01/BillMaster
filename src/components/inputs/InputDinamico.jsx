@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "./css/InputDinamico.css";
 
-function InputDinamico({ width, height, color }) {
+function InputDinamico({ width, height, color, onBlur, onTypeChange, onValueChange, id }) {
 	// Estado para almacenar el tipo de documento seleccionado y el valor ingresado
 	const [tipoDocumento, setTipoDocumento] = useState("Cedula");
 	const [valorDocumento, setValorDocumento] = useState("");
@@ -10,11 +10,13 @@ function InputDinamico({ width, height, color }) {
 	const handleTipoDocumentoChange = (event) => {
 		setTipoDocumento(event.target.value);
 		setValorDocumento("");
+		onTypeChange(event.target.value);
 	};
 
 	// Función para manejar cambios en el valor del documento ingresado
 	const handleValorDocumentoChange = (event) => {
 		setValorDocumento(event.target.value);
+		onValueChange(event.target.value);
 	};
 
 	const style = {
@@ -36,10 +38,11 @@ function InputDinamico({ width, height, color }) {
 						className="IDIFInput"
 						style={style}
 						type="text"
-						id="valorDocumento"
+						id={id}
 						value={valorDocumento}
 						onChange={handleValorDocumentoChange}
 						placeholder={`Ingrese el ${tipoDocumento === "Cedula" ? "Cédula" : "Pasaporte"}`}
+						onBlur={onBlur ? onBlur : undefined}
 					/>
 				</div>
 			)}
