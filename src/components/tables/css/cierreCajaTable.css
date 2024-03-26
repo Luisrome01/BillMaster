@@ -16,7 +16,7 @@
 	display: grid;
 	align-items: center;
 	justify-items: right;
-	grid-template-columns: repeat(4, 1fr);
+	grid-template-columns: repeat(6, 1fr);
 	padding: 15px;
 	padding-right: 25px;
 	background-color: #d6d6d6;
@@ -33,7 +33,7 @@
 
 .cierreCajaTableRow {
 	display: grid;
-	grid-template-columns: repeat(4, 1fr);
+	grid-template-columns: repeat(6, 1fr);
 	align-items: center;
 	justify-items: right;
 	margin-top: 25px;

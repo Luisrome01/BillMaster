@@ -22,6 +22,7 @@
 .CierreInput {
 	display: flex;
 	flex-direction: column;
+	/* align-items: flex-start; */
     gap: 20px;
    
 }
@@ -36,8 +37,8 @@
 .CierreCierre {
 	margin-left: 10%;
 	display: flex;
-    gap: 40px;
-    flex-direction: row;
+    gap: 30px;
+    flex-direction: column;
 }
 
 .CierreBanco {

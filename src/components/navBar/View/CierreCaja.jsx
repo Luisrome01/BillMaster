@@ -1,13 +1,31 @@
 import React from "react";
+import { useState, useEffect } from "react";
 import BtnGeneral from "../../../components/buttons/BtnGeneral";
 import InputDiferente from "../../../components/inputs/InputDiferente";
 import CierreCajaTable from "../../../components/tables/cierreCajaTable";
 import svgAdd from "../../../assets/search.svg";
 import cartSVG from "../../../assets/marketKart.svg";
-import InputDinamico from "../../inputs/InputDinamico";
 import "./css/CierreCaja.css";
 
 const CierreCaja = () => {
+	const [montoTotal, setMontoTotal] = useState("0.00");
+	const [data, setData] = useState([]);
+
+	useEffect(() =>{
+		//fetch para obtener la data
+		fetch("/src/json/facturas.json")
+			.then((response) => {
+				if(!response.ok){
+					throw new Error("Error fetching data")
+				}
+				return response.json()
+			})
+			.then((data) => {
+				setData(data.data)
+			})
+		},[])
+		console.log(data[0].monto)
+
 	return (
 		<div className="CierreContainer">
 			<h1 className="CierreHeaderContainer">Filtrar factura</h1>
@@ -15,8 +33,8 @@ const CierreCaja = () => {
 			<div className="CierreInput">
 				<div className="CierreCierredPago">
 					<div className="CierreCierre">
-						<InputDiferente name="Fecha:" color="#D9D9D9" width="160px" />
-						<InputDinamico name="Cedula o Pasaporte:" color="#D9D9D9" width="200px" />
+					<InputDiferente name="Responsable" color="#D9D9D9" width="160px" />
+					<InputDiferente name="Fecha:" color="#D9D9D9" width="160px" />
 					</div>
 				</div>
 				<div className="CierreMonto-BotonAgregar">
@@ -30,7 +48,7 @@ const CierreCaja = () => {
 			</div>
 
 			<div className="FacturaTableContainer">
-				<CierreCajaTable />
+				<CierreCajaTable data={data}/>
 			</div>
 
 			<div className="FacturaCheckoutContainer">
@@ -52,7 +70,7 @@ const CierreCaja = () => {
 							fontWeight: "bold",
 						}}
 					>
-						{/* $ {montoTotal} */}
+						$ {montoTotal}
 					</p>
 				</div>
 				<BtnGeneral text="Checkout" width="140px" color="#ff6060" onHoverColor="#c54444" img={cartSVG} />
