@@ -5,7 +5,7 @@ import "./css/Login.css";
 // Components
 import BtnGeneral from "../components/buttons/BtnGeneral";
 import InputGeneral from "../components/inputs/InputGeneral";
-import image from "../assets/tabler_logout.svg";
+import image from "../assets/tabler_login.svg";
 import page from "../assets/Group2015.svg";
 
 const Login = () => {
