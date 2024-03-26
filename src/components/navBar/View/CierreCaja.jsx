@@ -4,11 +4,16 @@ import BtnGeneral from "../../../components/buttons/BtnGeneral";
 import InputDiferente from "../../../components/inputs/InputDiferente";
 import CierreCajaTable from "../../../components/tables/cierreCajaTable";
 import svgAdd from "../../../assets/search.svg";
-import cartSVG from "../../../assets/marketKart.svg";
+import checkSVG from "../../../assets/checkmark.svg";
+
 import "./css/CierreCaja.css";
 
 const CierreCaja = () => {
 	const [montoTotal, setMontoTotal] = useState("0.00");
+
+	const [listIngresos, setListIngresos] = useState([]);
+	const [listEgresos, setListEgresos] = useState([]);
+	
 	const [data, setData] = useState([]);
 
 	useEffect(() =>{
@@ -23,7 +28,11 @@ const CierreCaja = () => {
 			.then((data) => {
 				setData(data.data)
 				const total = data.data.reduce((acc, item) => acc + item.monto, 0);
+				const ingresos = data.data.reduce((acc, item) => acc + item.ingresos, 0);
+				const egresos = data.data.reduce((acc, item) => acc + item.egresos, 0);
 				setMontoTotal(total.toFixed(2));
+				setListIngresos(ingresos.toFixed(2));
+				setListEgresos(egresos.toFixed(2));
 			})
 
 		},[])
@@ -37,11 +46,7 @@ const CierreCaja = () => {
 					<div className="CierreCierre">
 					<InputDiferente name="Responsable" color="#D9D9D9" width="160px" />
 					<InputDiferente name="Fecha:" color="#D9D9D9" width="160px" />
-					</div>
-				</div>
-				<div className="CierreMonto-BotonAgregar">
-					<div className="CierreBotonAgregar">
-						<BtnGeneral img={svgAdd} text="Buscar factura" width="150px" />
+					<InputDiferente name="Hora:" color="#D9D9D9" width="160px" />
 					</div>
 				</div>
 			</div>
@@ -59,7 +64,7 @@ const CierreCaja = () => {
 							fontSize: "18px",
 						}}
 					>
-						Total:
+						Saldo de cierre:
 					</p>
 					<p
 						style={{
@@ -72,7 +77,17 @@ const CierreCaja = () => {
 						$ {montoTotal}
 					</p>
 				</div>
-				<BtnGeneral text="Checkout" width="140px" color="#ff6060" onHoverColor="#c54444" img={cartSVG} />
+				
+				<div style={{ display: "flex", flexDirection: "column" }}>
+						<p style={{ color: "#12B422", position: "relative", marginLeft: "auto", fontSize: "18px" }}>
+							Ingresos: $ {listIngresos}
+						</p>
+						<p style={{ color: "#EB0000", position: "relative", marginLeft: "auto", fontSize: "18px", fontWeight: "bold" }}>
+							Egresos: $ {listEgresos}
+						</p>
+				</div>
+				
+				<BtnGeneral text="Cierre de caja" width="140px" color="#ff6060" onHoverColor="#c54444" img={checkSVG} />
 			</div>
 		</div>
 	);

@@ -1,3 +1,8 @@
+@font-face {
+	font-family: "SF Pro Display Bold";
+	src: url("./assets/fonts/sf-pro-display-bold.OTF") format("opentype");
+}
+
 .cierreCajaTableContainer {
 	align-self: center;
 	border: 1.42917px solid #000000;
@@ -41,7 +46,7 @@
 
 .cierreCajaTableHeader p {
 	font-size: 15px;
-	font-weight: bold;
+	font-family: "SF Pro Display Bold", sans-serif;
 }
 
 .cierreCajaTableRow p {
