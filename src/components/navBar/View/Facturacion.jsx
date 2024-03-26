@@ -1,5 +1,5 @@
-import "./css/Facturacion.css";
 import React, { useState, useEffect } from "react";
+import "./css/Facturacion.css";
 import BtnGeneral from "../../../components/buttons/BtnGeneral";
 import InputDinamico from "../../../components/inputs/InputDinamico";
 import InputDiferente from "../../../components/inputs/InputDiferente";
@@ -8,16 +8,36 @@ import svgSearch from "../../../assets/SearchSVG.svg";
 import cartSVG from "../../../assets/marketKart.svg";
 import ProductTable from "../../tables/productTable";
 
-const Facturacion = () => {
-	const [listProductos, setListProductos] = useState([]);
-
-	const eliminarProducto = (index) => {
-		const updatedProductos = [...listProductos];
-		updatedProductos.splice(index, 1);
-		setListProductos(updatedProductos);
-	};
-
+const Facturacion = ({ setListaProductosExterna, continuarVista, listaProductosInterna }) => {
+	const [listProductos, setListProductos] = useState(listaProductosInterna);
 	const [montoTotal, setMontoTotal] = useState("0.00");
+	const [getCantidad, setCantidad] = useState(1);
+	const [getCodigo, setCodigo] = useState("");
+	const [getIdentificacion, setIdentificacion] = useState("Cedula");
+	const [getValorIdentificacion, setValorIdentificacion] = useState("");
+	const [getClientes, setClientes] = useState([]);
+	const [getValorNombre, setValorNombre] = useState("");
+	const [getValorDireccion, setValorDireccion] = useState("");
+	const [getValorRif, setValorRif] = useState("");
+	const [getValorCodigo, setValorCodigo] = useState("");
+	const [getValorCantidad, setValorCantidad] = useState("");
+	const [getName, setName] = useState("");
+	const [getDireccion, setDireccion] = useState("");
+	const [getRif, setRif] = useState("");
+	const [disabledInput, setDisabledInput] = useState(false);
+
+	useEffect(() => {
+		fetch("/src/json/clientes.json")
+			.then((response) => {
+				if (!response.ok) {
+					throw new Error("Error fetching data");
+				}
+				return response.json();
+			})
+			.then((data) => {
+				setClientes(data.data);
+			});
+	}, []);
 
 	useEffect(() => {
 		let total = 0;
@@ -27,10 +47,14 @@ const Facturacion = () => {
 		setMontoTotal(total.toFixed(2));
 	}, [listProductos]);
 
-	const [getCantidad, setCantidad] = useState(1);
-	const [getCodigo, setCodigo] = useState("");
-
-	useEffect(() => {}, [listProductos]);
+	const eliminarProducto = (codigo) => {
+		const index = listProductos.findIndex((element) => element.codigo === codigo);
+		if (index !== -1) {
+			const updatedProductos = [...listProductos];
+			updatedProductos.splice(index, 1);
+			setListProductos(updatedProductos);
+		}
+	};
 
 	const addProduct = () => {
 		fetch("/src/json/productos.json")
@@ -84,37 +108,15 @@ const Facturacion = () => {
 			});
 	};
 
-	const [getIdentificacion, setIdentificacion] = useState("Cedula");
-	const [getValorIdentificacion, setValorIdentificacion] = useState("");
-	const [getClientes, setClientes] = useState([]);
-	const [getValorNombre, setValorNombre] = useState("");
-	const [getValorDireccion, setValorDireccion] = useState("");
-	const [getValorRif, setValorRif] = useState("");
-	const [getValorCodigo, setValorCodigo] = useState("");
-	const [getValorCantidad, setValorCantidad] = useState("");
-	const [getName, setName] = useState("");
-	const [getDireccion, setDireccion] = useState("");
-	const [getRif, setRif] = useState("");
-	const [disabledInput, setDisabledInput] = useState(false);
+	useEffect(() => {
+		setListaProductosExterna(listProductos);
+	}, [listProductos]);
 
-	function cleanInputs() {
+	const cleanInputs = () => {
 		setValorNombre("");
 		setValorDireccion("");
 		setValorRif("");
-	}
-
-	useEffect(() => {
-		fetch("/src/json/clientes.json")
-			.then((response) => {
-				if (!response.ok) {
-					throw new Error("Error fetching data");
-				}
-				return response.json();
-			})
-			.then((data) => {
-				setClientes(data.data);
-			});
-	}, []);
+	};
 
 	const handleOnBlur = () => {
 		switch (getIdentificacion) {
@@ -162,7 +164,6 @@ const Facturacion = () => {
 			alert("Por favor llene todos los campos");
 			return;
 		}
-		// check if client already exists
 		const client = getClientes.find((element) => element.ci === getValorIdentificacion);
 		if (client) {
 			alert("Cliente ya existe");
@@ -250,8 +251,7 @@ const Facturacion = () => {
 								flexBasis="100%"
 								color="#D9D9D9"
 								width="70%"
-								placeholder="ej. Avenida Río Caura Torre Humboldt
-Prados del Este Piso 20 Oficina 20-06"
+								placeholder="ej. Avenida Río Caura Torre Humboldt Prados del Este Piso 20 Oficina 20-06"
 								disabled={disabledInput}
 								onChange={(newDireccion) => setDireccion(newDireccion)}
 							/>
@@ -319,10 +319,37 @@ Prados del Este Piso 20 Oficina 20-06"
 
 				<div className="FacturaCheckoutContainer">
 					<div style={{ display: "flex", flexDirection: "column" }}>
-						<p style={{ position: "relative", marginLeft: "auto", fontSize: "18px" }}>Total:</p>
-						<p style={{ position: "relative", marginLeft: "auto", fontSize: "25.4331px", fontWeight: "bold" }}>$ {montoTotal}</p>
+						<p
+							style={{
+								position: "relative",
+								marginLeft: "auto",
+								fontSize: "18px",
+							}}
+						>
+							Total:
+						</p>
+						<p
+							style={{
+								position: "relative",
+								marginLeft: "auto",
+								fontSize: "25.4331px",
+								fontWeight: "bold",
+							}}
+						>
+							$ {montoTotal}
+						</p>
 					</div>
-					<BtnGeneral text="Checkout" width="140px" color="#ff6060" onHoverColor="#c54444" img={cartSVG} />
+					<BtnGeneral
+						text="Metodo de Pago"
+						width="140px"
+						color="#ff6060"
+						onHoverColor="#c54444"
+						img={cartSVG}
+						handleClick={() => {
+							if (listProductos.length > 0) continuarVista();
+							else alert("No hay productos en la factura");
+						}}
+					/>
 				</div>
 			</div>
 		</>

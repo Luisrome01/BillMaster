@@ -14,31 +14,31 @@
 		},
 		{
 			"name": "Alejandro Amesti",
-			"ci": "30123456",
+			"ci": "30123457",
 			"direccion": "Calle 1 Av 2 Sector 3",
 			"rif": "V-12345678"
 		},
 		{
 			"name": "Misael Reverol",
-			"ci": "30123456",
+			"ci": "30123458",
 			"direccion": "Calle 1 Av 2 Sector 3",
 			"rif": "V-12345678"
 		},
 		{
 			"name": "Marcos Vejega",
-			"ci": "1123456",
+			"ci": "1123459",
 			"direccion": "Calle 1 Av 2 Sector 3",
 			"rif": "V-12345678"
 		},
 		{
 			"name": "Maria Fernanda",
-			"ci": "30123456",
+			"ci": "30123460",
 			"direccion": "Calle 1 Av 2 Sector 3",
 			"rif": "V-12345678"
 		},
 		{
 			"name": "Jubert Perez",
-			"ci": "30123456",
+			"ci": "30123461",
 			"direccion": "Calle 1 Av 2 Sector 3",
 			"rif": "V-12345678"
 		},
@@ -50,13 +50,13 @@
 		},
 		{
 			"name": "Juan Fernandez",
-			"idExtranjera": "30123456",
+			"idExtranjera": "301234562",
 			"direccion": "Calle 1 Av 2 Sector 3",
 			"rif": "V-12345678"
 		},
 		{
 			"name": "Antonio Villasmil",
-			"ci": "30310209",
+			"ci": "30123465",
 			"direccion": "Milagro Norte villa Oasys Country 2",
 			"rif": "V-12345678"
 		}

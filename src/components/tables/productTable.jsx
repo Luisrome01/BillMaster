@@ -27,7 +27,10 @@ const ProductTable = ({ width, height, color, rows, eliminarProducto }) => {
 				<div className="ProductTableBody">
 					{rows.map((fila, index) => (
 						<div key={index} className="ProductTableRow">
-							<button onClick={eliminarProducto} style={{ justifySelf: "center", border: "none", backgroundColor: "transparent" }}>
+							<button
+								onClick={() => eliminarProducto(fila.codigo)}
+								style={{ justifySelf: "center", border: "none", backgroundColor: "transparent" }}
+							>
 								<img src={trashbinSVG}></img>
 							</button>
 							<p style={{ justifySelf: "left" }}>{fila.codigo}</p>
@@ -36,7 +39,7 @@ const ProductTable = ({ width, height, color, rows, eliminarProducto }) => {
 							<p>$ {fila.precio}</p>
 							<p>$ {fila.iva}</p>
 							<p>$ {fila.total.toFixed(2)}</p>
-							<button style={{ border: "none", backgroundColor: "transparent" }}>
+							<button style={{ border: "none", backgroundColor: "transparent", paddingRight: "15px" }}>
 								<img src={exploreSVG}></img>
 							</button>
 						</div>

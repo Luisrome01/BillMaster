@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import NavBar from "../components/navBar/navBar";
 import "./css/MainView.css";
 //assets
@@ -13,6 +13,20 @@ import CierreCaja from "../components/navBar/View/CierreCaja";
 
 const MainView = () => {
 	const [componenteActivo, setComponenteActivo] = useState("Facturacion");
+	const [listProductos, setListProductos] = useState([]);
+	const [totalFactura, setTotalFactura] = useState(0);
+
+	useEffect(() => {
+		let total = 0;
+		listProductos.forEach((producto) => {
+			total += producto.total;
+		});
+		setTotalFactura(total);
+	}, [listProductos]);
+
+	const cambiarMetodoPago = () => {
+		setComponenteActivo("Metodos de Pago");
+	};
 
 	return (
 		<div className="MainContainer">
@@ -29,9 +43,15 @@ const MainView = () => {
 					</div>
 				</div>
 				<div className="FactContentBottom">
-					{componenteActivo === "Facturacion" && <Facturacion />}
 					{componenteActivo === "Productos" && <Productos />}
-					{componenteActivo === "Metodos de Pago" && <MetodosPago />}
+					{componenteActivo === "Facturacion" && (
+						<Facturacion
+							listaProductosInterna={listProductos}
+							setListaProductosExterna={setListProductos}
+							continuarVista={cambiarMetodoPago}
+						/>
+					)}
+					{componenteActivo === "Metodos de Pago" && <MetodosPago totalCosto={totalFactura.toFixed(2)} />}
 					{componenteActivo === "Cierre de Caja" && <CierreCaja />}
 				</div>
 			</div>
