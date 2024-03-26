@@ -36,6 +36,23 @@
 	gap: 20px;
 }
 
+.MetodosPagoTableContainer {
+	width: 60%;
+	display: flex;
+	align-self: center;
+	justify-content: center;
+	flex-basis: 50%;
+}
 
+.MetodosCheckoutContainer {
+	align-self: normal;
+	flex-basis: 15%;
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	gap: 30px;
+	margin-left: auto;
+	margin-right: 10%;
+}
 
 
