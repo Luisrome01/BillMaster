@@ -1,6 +1,7 @@
 import React from "react";
 import BtnGeneral from "../../../components/buttons/BtnGeneral";
 import InputDiferente from "../../../components/inputs/InputDiferente";
+import CierreCajaTable from "../../../components/tables/cierreCajaTable";
 import svgAdd from "../../../assets/search.svg";
 import cartSVG from "../../../assets/marketKart.svg";
 import InputDinamico from "../../inputs/InputDinamico";
@@ -28,7 +29,9 @@ const CierreCaja = () => {
 				</div>
 			</div>
 
-			<div className="FacturaTableContainer">{/* <ProductTable width="90%" height="85%" onTotalChange={actualizarMontoTotal} /> */}</div>
+			<div className="FacturaTableContainer">
+				<CierreCajaTable />
+			</div>
 
 			<div className="FacturaCheckoutContainer">
 				<div style={{ display: "flex", flexDirection: "column" }}>
