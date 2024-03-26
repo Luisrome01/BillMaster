@@ -22,9 +22,11 @@ const CierreCaja = () => {
 			})
 			.then((data) => {
 				setData(data.data)
+				const total = data.data.reduce((acc, item) => acc + item.monto, 0);
+				setMontoTotal(total.toFixed(2));
 			})
+
 		},[])
-		console.log(data[0].monto)
 
 	return (
 		<div className="CierreContainer">
@@ -38,9 +40,6 @@ const CierreCaja = () => {
 					</div>
 				</div>
 				<div className="CierreMonto-BotonAgregar">
-					<div className="CierreMonto">
-						<InputDiferente name="Monto:" color="#D9D9D9" width="160px" />
-					</div>
 					<div className="CierreBotonAgregar">
 						<BtnGeneral img={svgAdd} text="Buscar factura" width="150px" />
 					</div>
