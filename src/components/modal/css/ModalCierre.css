@@ -1,0 +1,56 @@
+.modalContainer {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 900px;
+    height: 500px;
+    border-radius: 12px;
+    background-color: white;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    display: flex;
+    flex-direction: column;
+    padding: 25px;
+  }
+  /* .modalColor {
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(200, 200, 200);
+    position: fixed;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  } */
+  .title{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .bodyContainer{
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    font-size: 20px;
+  }
+  .FechaHora{
+    display: flex;
+    flex-direction: row;
+    gap: 40px;
+  }
+  .modalContainer .footer {
+    flex: 20%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .footerContainer{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    font-size: 25px;
+  }
+  .Estadistica{
+    color: gray;
+  }

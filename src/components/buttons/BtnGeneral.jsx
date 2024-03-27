@@ -2,7 +2,7 @@ import React from "react";
 import "./css/btn.css";
 import { useState } from "react";
 
-const BtnGeneral = ({ text, handleClick, width, height, color, onHoverColor, borderRadius, img, shadow }) => {
+const BtnGeneral = ({ text, handleClick, width, height, color, onHoverColor, borderRadius, img, shadow}) => {
 	const [isHovered, setIsHovered] = useState(false);
 
 	const handleMouseEnter = () => {

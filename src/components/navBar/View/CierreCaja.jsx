@@ -3,18 +3,17 @@ import { useState, useEffect } from "react";
 import BtnGeneral from "../../../components/buttons/BtnGeneral";
 import InputDiferente from "../../../components/inputs/InputDiferente";
 import CierreCajaTable from "../../../components/tables/cierreCajaTable";
-import svgAdd from "../../../assets/search.svg";
+import ModalCierre from "../../modal/ModalCierre"
 import checkSVG from "../../../assets/checkmark.svg";
 
 import "./css/CierreCaja.css";
 
 const CierreCaja = () => {
 	const [montoTotal, setMontoTotal] = useState("0.00");
-
 	const [listIngresos, setListIngresos] = useState([]);
 	const [listEgresos, setListEgresos] = useState([]);
-	
 	const [data, setData] = useState([]);
+	const [openModal, setOpenModal] = useState(false);
 
 	useEffect(() =>{
 		//fetch para obtener la data
@@ -87,7 +86,8 @@ const CierreCaja = () => {
 						</p>
 				</div>
 				
-				<BtnGeneral text="Cierre de caja" width="140px" color="#ff6060" onHoverColor="#c54444" img={checkSVG} />
+				<BtnGeneral text="Cierre de caja" width="140px" color="#ff6060" onHoverColor="#c54444" img={checkSVG} handleClick={() => {setOpenModal(true)}}/>
+				{openModal && <ModalCierre closeModal={setOpenModal} ingresos={listIngresos} egresos={listEgresos} total={montoTotal}/>}
 			</div>
 		</div>
 	);

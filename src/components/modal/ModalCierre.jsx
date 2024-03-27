@@ -1,0 +1,53 @@
+import React from "react";
+import BtnGeneral from "../buttons/BtnGeneral";
+import svg from "../../assets/check.svg";
+import "./css/ModalCierre.css";
+
+const ModalCierre = ({ closeModal, ingresos, egresos, total }) => {
+    return(
+        <div className="modalColor">
+            <div className="modalContainer">
+                <div className="title">
+                    <h1>Resumen del cierre de caja</h1>
+                    <BtnGeneral
+                    text="X"
+                    width="40px"
+                    height="40px"
+                    color="#FF6060"
+                    bgColor="#FF0000"
+                    handleClick={() =>{closeModal(false)}}
+                />
+                </div>
+                <div className="body">
+                    <div className="bodyContainer">
+                        <p>Responsable: Alejandro Avila</p>
+                            <div className="FechaHora">
+                                <p>Fecha: 26/03/2024</p>
+                                <p>Hora: 5:53 PM</p>
+                        </div>
+                        <p className="Estadistica">Estadistica</p>
+                            <p>Factura realizadas: Numero de facturas</p>
+                            <p>Saldo de cierre: ${total}</p>
+                            <p>Ingresos: ${ingresos}</p>
+                            <p>Egresos: ${egresos}</p>
+                    </div>
+                </div>
+                <div className="footer">
+                    <div className="footerContainer">
+                        <img src={svg} />
+                        <h4>
+                        El saldo de cierre concuerda con los ingresos y egresos de las transacciones.
+                    </h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+    )
+}
+
+export default ModalCierre;
+
+/*
+
+
+*/
