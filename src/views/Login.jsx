@@ -25,7 +25,7 @@ const Login = () => {
                     <InputGeneral
                         name={"Correo Electrónico"}
                         type="text"
-                        placeholder=" ej. JubertPerez"
+                        placeholder=" ej. JubertPerez@gmail.com"
                         width="80%"
                     />
 
