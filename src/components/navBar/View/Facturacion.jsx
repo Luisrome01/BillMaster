@@ -159,6 +159,12 @@ const Facturacion = ({ setListaProductosExterna, continuarVista, listaProductosI
 		}
 	};
 
+	// codigo de marcos
+
+	const factura = {};
+
+	const imprimirFactura = () => {};
+
 	const createClient = () => {
 		if (getValorIdentificacion === "" || getDireccion === "" || getRif === "" || getName === "") {
 			alert("Por favor llene todos los campos");
@@ -318,6 +324,8 @@ const Facturacion = ({ setListaProductosExterna, continuarVista, listaProductosI
 				</div>
 
 				<div className="FacturaCheckoutContainer">
+					<BtnGeneral text="imprimirFactura" handleClick={imprimirFactura} />
+
 					<div style={{ display: "flex", flexDirection: "column" }}>
 						<p
 							style={{

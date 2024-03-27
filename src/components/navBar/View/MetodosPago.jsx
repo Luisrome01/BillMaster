@@ -47,7 +47,9 @@ const MetodosPago = ({ totalCosto }) => {
 					</div>
 				</div>
 
-				<div className="MetodosPagoTableContainer"> <MetodosTable  data={[]}/> </div>
+				<div className="MetodosPagoTableContainer">
+					<MetodosTable data={[]} />
+				</div>
 
 				<div className="MetodosCheckoutContainer">
 					<div style={{ display: "flex", flexDirection: "column" }}>
@@ -64,7 +66,6 @@ const MetodosPago = ({ totalCosto }) => {
 					</div>
 					<BtnGeneral text="Checkout" width="140px" color="#ff6060" onHoverColor="#c54444" img={cartSVG} />
 				</div>
-				
 			</div>
 		</>
 	);
