@@ -1,3 +1,8 @@
+@font-face {
+  font-family: "SF Pro Display Bold";
+  src: url("./assets/fonts/sf-pro-display-bold.OTF") format("opentype");
+}
+
 .modalContainer {
     position: fixed;
     top: 50%;
@@ -52,5 +57,5 @@
     font-size: 25px;
   }
   .Estadistica{
-    color: gray;
+    font-family: "SF Pro Display Bold", sans-serif;
   }

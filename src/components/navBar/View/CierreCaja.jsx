@@ -14,6 +14,7 @@ const CierreCaja = () => {
 	const [listEgresos, setListEgresos] = useState([]);
 	const [data, setData] = useState([]);
 	const [openModal, setOpenModal] = useState(false);
+	const [cantidadFacturas, setCantidadFacturas] = useState(0);
 
 	useEffect(() =>{
 		//fetch para obtener la data
@@ -32,6 +33,7 @@ const CierreCaja = () => {
 				setMontoTotal(total.toFixed(2));
 				setListIngresos(ingresos.toFixed(2));
 				setListEgresos(egresos.toFixed(2));
+				setCantidadFacturas(data.data.length);
 			})
 
 		},[])
@@ -87,7 +89,7 @@ const CierreCaja = () => {
 				</div>
 				
 				<BtnGeneral text="Cierre de caja" width="140px" color="#ff6060" onHoverColor="#c54444" img={checkSVG} handleClick={() => {setOpenModal(true)}}/>
-				{openModal && <ModalCierre closeModal={setOpenModal} ingresos={listIngresos} egresos={listEgresos} total={montoTotal}/>}
+				{openModal && <ModalCierre closeModal={setOpenModal} cantidadFacturas={cantidadFacturas} ingresos={listIngresos} egresos={listEgresos} total={montoTotal}/>}
 			</div>
 		</div>
 	);
