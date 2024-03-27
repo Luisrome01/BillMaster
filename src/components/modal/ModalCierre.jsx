@@ -3,7 +3,7 @@ import BtnGeneral from "../buttons/BtnGeneral";
 import svg from "../../assets/check.svg";
 import "./css/ModalCierre.css";
 
-const ModalCierre = ({ closeModal, ingresos, egresos, total, cantidadFacturas }) => {
+const ModalCierre = ({ closeModal, ingresos, egresos, total, cantidadFacturas, responsable, fecha, hora}) => {
     return (
         <div className="modalColor">
             <div className="modalContainer">
@@ -22,10 +22,10 @@ const ModalCierre = ({ closeModal, ingresos, egresos, total, cantidadFacturas })
                 </div>
                 <div className="body">
                     <div className="bodyContainer">
-                        <p>Responsable: Alejandro Avila</p>
+                        <p>Responsable: {responsable}</p>
                         <div className="FechaHora">
-                            <p>Fecha: 26/03/2024</p>
-                            <p>Hora: 5:53 PM</p>
+                            <p>Fecha: {fecha}</p>
+                            <p>Hora: {hora}</p>
                         </div>
                         <p className="Estadistica">Estadística</p>
                         <p>Factura realizadas: {cantidadFacturas}</p>

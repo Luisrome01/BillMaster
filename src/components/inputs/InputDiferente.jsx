@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "./css/InputDiferente.css";
 
-const InputDiferente = ({ type, placeholder, width, height, color, borderRadius, shadow, name, flexBasis, onChange, disabled, id, value }) => {
+const InputDiferente = ({ type, placeholder, width, height, color, borderRadius, shadow, name, flexBasis, onChange, disabled, id, value, updateState }) => {
 	value = value ? value : "";
 	const style = {
 		height: height ? height : "32px",
@@ -14,11 +14,14 @@ const InputDiferente = ({ type, placeholder, width, height, color, borderRadius,
 	const [inputText, setInputText] = useState("");
 
 	const handleChange = (e) => {
-		setInputText(e.target.value);
-		if (onChange) {
-			onChange(e.target.value);
-		}
-	};
+        setInputText(e.target.value);
+        if (onChange) {
+            onChange(e.target.value);
+        }
+        if (updateState) {
+            updateState(e.target.value);
+        }
+    };
 
 	useEffect(() => {
 		setInputText(value);
