@@ -3,120 +3,56 @@
         "name": "Harina Pan",
         "price": 0.8,
         "IVA": 0.024,
-        "total": 0.824
+        "total": 0.824,
+        "img": "https://www.mercadomio.com.ve/wp-content/uploads/2019/07/harinapan-1kg.jpg"
     },
     "INV7927068486": {
         "name": "Leche",
         "price": 1.2,
         "IVA": 0.036,
-        "total": 1.236
+        "total": 1.236,
+        "img": "https://www.mercadomio.com.ve/wp-content/uploads/2019/07/harinapan-1kg.jpg"
     },
     "INV4022123377": {
         "name": "Azucar",
         "price": 0.5,
         "IVA": 0.015,
-        "total": 0.515
+        "total": 0.515,
+        "img": "https://www.mercadomio.com.ve/wp-content/uploads/2019/07/harinapan-1kg.jpg"
     },
     "INV8398260084": {
         "name": "Cafe",
         "price": 2.5,
         "IVA": 0.075,
-        "total": 2.575
+        "total": 2.575,
+        "img": "https://www.mercadomio.com.ve/wp-content/uploads/2019/07/harinapan-1kg.jpg"
     },
     "INV4288587649": {
         "name": "Arroz",
         "price": 1.0,
         "IVA": 0.03,
-        "total": 1.03
+        "total": 1.03,
+        "img": "https://www.mercadomio.com.ve/wp-content/uploads/2019/07/harinapan-1kg.jpg"
     },
     "INV5469188865": {
         "name": "Pasta",
         "price": 0.8,
         "IVA": 0.024,
-        "total": 0.824
+        "total": 0.824,
+        "img": "https://www.mercadomio.com.ve/wp-content/uploads/2019/07/harinapan-1kg.jpg"
     },
     "INV3860812434": {
         "name": "Aceite",
         "price": 2.0,
         "IVA": 0.06,
-        "total": 2.06
+        "total": 2.06,
+        "img": "https://www.mercadomio.com.ve/wp-content/uploads/2019/07/harinapan-1kg.jpg"
     },
     "INV7176897078": {
         "name": "Sal",
         "price": 0.3,
         "IVA": 0.009,
-        "total": 0.309
-    },
-    "INV3072225566": {
-        "name": "Vinagre",
-        "price": 0.5,
-        "IVA": 0.015,
-        "total": 0.515
-    },
-    "INV6157155189": {
-        "name": "Salsa de Tomate",
-        "price": 0.8,
-        "IVA": 0.024,
-        "total": 0.824
-    },
-    "INV6641890441": {
-        "name": "Mantequilla",
-        "price": 1.0,
-        "IVA": 0.03,
-        "total": 1.03
-    },
-    "INV2717611559": {
-        "name": "Huevos",
-        "price": 1.5,
-        "IVA": 0.045,
-        "total": 1.545
-    },
-    "INV5174803506": {
-        "name": "Queso",
-        "price": 2.0,
-        "IVA": 0.06,
-        "total": 2.06
-    },
-    "INV5495563868": {
-        "name": "Jamon",
-        "price": 2.0,
-        "IVA": 0.06,
-        "total": 2.06
-    },
-    "INV3145817857": {
-        "name": "Pan",
-        "price": 0.5,
-        "IVA": 0.015,
-        "total": 0.515
-    },
-    "INV2051428478": {
-        "name": "Galletas",
-        "price": 1.0,
-        "IVA": 0.03,
-        "total": 1.03
-    },
-    "INV2922922922": {
-        "name": "Cereal",
-        "price": 2.0,
-        "IVA": 0.06,
-        "total": 2.06
-    },
-    "INV3723814827": {
-        "name": "Yogurt",
-        "price": 1.0,
-        "IVA": 0.03,
-        "total": 1.03
-    },
-    "INV1859082885": {
-        "name": "Frutas",
-        "price": 2.0,
-        "IVA": 0.06,
-        "total": 2.06
-    },
-    "INV9586433013": {
-        "name": "Verduras",
-        "price": 1.5,
-        "IVA": 0.045,
-        "total": 1.545
+        "total": 0.309,
+        "img": "https://www.mercadomio.com.ve/wp-content/uploads/2019/07/harinapan-1kg.jpg"
     }
 }

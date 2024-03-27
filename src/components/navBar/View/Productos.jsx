@@ -30,6 +30,7 @@ const Productos = () => {
                         key={index}
                         name={producto.name}
                         price={producto.price}
+                        img={producto.img}
                     />
                 ))}
             </div>

@@ -1,10 +1,12 @@
 import React from "react";
 import "./css/producto.css";
 
-const Producto = ({ name, price }) => {
+const Producto = ({ name, price, img }) => {
     return (
         <div className="card">
-            <div className="img-card"></div>
+            <div className="img-card">
+                <img src={img} />
+            </div>
             <div className="add-cart">Add to Cart</div>
             <div className="info-card">
                 <div>
