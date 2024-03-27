@@ -7,7 +7,7 @@ const Producto = ({ name, price, img }) => {
             <div className="img-card">
                 <img src={img} className="imgProduct"/>
             </div>
-            <div className="add-cart">Add to Cart</div>
+            <div className="add-cart">Agregar al carrito</div>
             <div className="info-card">
                 <div>
                     <p>
