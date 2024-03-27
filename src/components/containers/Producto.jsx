@@ -6,6 +6,7 @@ const Producto = ({ name, price, img }) => {
         <div className="card">
             <div className="img-card">
                 <img src={img} />
+                <img src="" alt="" />
             </div>
             <div className="add-cart">Add to Cart</div>
             <div className="info-card">
