@@ -9,6 +9,7 @@
     display: flex;
     justify-content: center;
     cursor: pointer;
+    border-radius: 15px;
   }
   
   .card:hover {
@@ -63,7 +64,11 @@
   
   .card .info-card p {
     font-size: 14px;
-    margin: 5px;
+  }
+
+  .imgProduct{
+    width: 150px;
+    height: 150px;
   }
   
   
