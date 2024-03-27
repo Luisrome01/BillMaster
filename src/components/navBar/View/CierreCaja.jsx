@@ -136,7 +136,13 @@ const CierreCaja = () => {
                     onHoverColor="#c54444"
                     img={checkSVG}
                     handleClick={() => {
-                        setOpenModal(true);
+                        if (!responsable || !fecha || !hora) {
+                            alert(
+                                "Por favor llene todos los campos antes de cerrar la caja"
+                            );
+                        } else {
+                            setOpenModal(true);
+                        }
                     }}
                 />
                 {openModal && (
