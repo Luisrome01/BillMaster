@@ -1,18 +1,23 @@
 import React from "react";
 import "./css/producto.css";
-const Producto = () =>{
+const Producto = ({data}) =>{
     return (
-        <div class="card">
-            <div class="img-card">
+        <div className="card">
+            <div className="img-card">
 
             </div>
 
-            <div class="add-cart">
+            <div className="add-cart">
                 Add to Cart
             </div>
-            <div class="info-card">
-                <p><strong>Lorem ipsum</strong></p>
-                <p>Price : 15$</p>
+            <div className="info-card">
+                {data.map((item) => (
+                        <div key={item.id}>
+                            <p><strong>{item.name}</strong></p>
+                            <p>Price : {item.price}$</p>
+                        </div>
+                    ))
+                }
             </div>
       </div>
     )
