@@ -1,14 +1,38 @@
-import React from "react";
-import { Link } from "react-router-dom";
-import "./css/Login.css";
-
-// Components
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import usuarios from "../json/usuarios.json";
 import BtnGeneral from "../components/buttons/BtnGeneral";
 import InputGeneral from "../components/inputs/InputGeneral";
 import image from "../assets/tabler_login.svg";
 import page from "../assets/Group2015.svg";
+import "./css/Login.css";
 
 const Login = () => {
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+    const [error, setError] = useState("");
+    const navigate = useNavigate();
+
+    const handleLogin = () => {
+        setError("");
+
+        if (!email || !password) {
+            setError("Por favor ingresa correo electrónico y contraseña.");
+            return;
+        }
+
+        const user = usuarios.data.find(
+            (user) => user.email === email && user.pass === password
+        );
+
+        if (!user) {
+            setError("Correo electrónico o contraseña incorrectos.");
+            return;
+        }
+
+        navigate("/main");
+    };
+
     return (
         <div className="LogContainerGeneral">
             <div className="LogContainer">
@@ -27,6 +51,8 @@ const Login = () => {
                         type="text"
                         placeholder=" ej. JubertPerez@gmail.com"
                         width="80%"
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
                     />
 
                     <InputGeneral
@@ -34,18 +60,19 @@ const Login = () => {
                         type="password"
                         placeholder=" Contraseña"
                         width="80%"
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
                     />
 
-                    <Link to="/main" style={{ textDecoration: "none" }}>
-                        <BtnGeneral
-                            text="Ingresar"
-                            handleClick={() => {}}
-                            img={image}
-                        />
-                    </Link>
+                    {error && <p style={{ color: "red" }}>{error}</p>}
+                    <BtnGeneral
+                        text="Ingresar"
+                        handleClick={handleLogin}
+                        img={image}
+                    />
                 </div>
             </div>
-            <img src={page} alt="imagen" className="LogImage"/>
+            <img src={page} alt="imagen" className="LogImage" />
         </div>
     );
 };
