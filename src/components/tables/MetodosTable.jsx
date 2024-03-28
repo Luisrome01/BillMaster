@@ -19,14 +19,9 @@ const MetodosTable = ({ width, height, color, data }) => {
 				<div className="MetodosTableBody">
 					{data.map((fila, index) => (
 						<div key={index} className="MetodosTableRow">
-							<p>{fila.id}</p>
-							<p>{fila.date}</p>
+							<p>{fila.metodosPago}</p>
+							<p>{fila.banco}</p>
 							<p>{fila.monto}</p>
-							<p>{fila.ingresos}</p>
-							<p>{fila.egresos}</p>
-							<button style={{ border: "none", backgroundColor: "transparent", paddingRight: "15px", justifyContent: "right"}}>
-								<img src={exploreSVG}></img>
-							</button>
 						</div>
 					))}
 				</div>

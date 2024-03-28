@@ -9,15 +9,13 @@
 	box-sizing: border-box;
 	box-shadow: 3.81111px 5.71667px 0px #000000;
 	border-radius: 22.8667px;
-    width: 10%;
-    
+	width: 10%;
 }
 
 .MetodosTableWrapper {
 	display: flex;
 	flex-direction: column;
 	height: 35vh;
-
 }
 
 .MetodosTableHeader {
@@ -33,30 +31,30 @@
 
 .MetodosTableBody {
 	display: flex;
-    justify-items: center;
+	justify-items: center;
 	flex-direction: column;
 	overflow-y: auto;
 	height: 100%;
-	margin-right: 10px;
-    width: 60%;
+	width: 100%;
 }
 
 .MetodosTableRow {
 	display: grid;
 	grid-template-columns: repeat(3, 1fr);
+	padding-left: 15px;
+	padding-right: 25px;
 	align-items: center;
-	justify-items: right;
+	justify-items: left;
 	margin-top: 25px;
 }
 
 .MetodosTableHeader p {
 	font-size: 15px;
 	font-family: "SF Pro Display Bold", sans-serif;
-    justify-items: center;
-    display: flex;
-    width: 100%;
-    padding: 8px;
-   
+	justify-items: center;
+	display: flex;
+	width: 100%;
+	padding: 8px;
 }
 
 .MetodosTableRow p {
