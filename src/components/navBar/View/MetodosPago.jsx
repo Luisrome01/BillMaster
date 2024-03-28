@@ -47,11 +47,13 @@ const MetodosPago = ({ totalCosto }) => {
 		if (!valido) return;
 		setListMetodosPago([
 			...listMetodosPago,
-			{ metodosPago: metodoPago, banco: metodoPago === "TRANSFERENCIA" || "TARJETA" ? banco : "NO APLICA", monto: parseFloat(monto) },
+			{
+				metodosPago: metodoPago,
+				banco: metodoPago === "TRANSFERENCIA" || metodoPago === "TARJETA" ? banco : "NO APLICA",
+				monto: parseFloat(monto),
+			},
 		]);
 		setMontoPagado((prev) => (parseFloat(prev) + parseFloat(monto)).toFixed(2));
-		setMetodoPago("");
-		setBanco("");
 		setMonto("");
 	};
 
