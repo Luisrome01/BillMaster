@@ -11,21 +11,23 @@ const MetodosTable = ({ width, height, color, data, eliminarPago}) => {
 		<div style={style} className="MetodosTableContainer">
 			<div className="MetodosTableWrapper">
 				<div className="MetodosTableHeader">
+				
 					<p>Metodo de Pago</p>
 					<p>Banco</p>
 					<p>Monto</p>
+					<p></p>
 				</div>
 				<div className="MetodosTableBody">
 					{data.map((fila, index) => (
 						<div key={index} className="MetodosTableRow">
-							<button
-								style={{ justifySelf: "center", border: "none", backgroundColor: "transparent" }}
-								>
-								<img src={trashbinSVG}></img>
-							</button>
 							<p>{fila.metodosPago}</p>
 							<p>{fila.banco}</p>
 							<p>{fila.monto}</p>
+							<button
+								style={{ justifySelf: "left", border: "none", backgroundColor: "transparent" }}
+								>
+								<img src={trashbinSVG}></img>
+							</button>
 						</div>
 					))}
 				</div>

@@ -22,7 +22,7 @@
 	display: grid;
 	align-items: center;
 	justify-items: center;
-	grid-template-columns: repeat(3, 1fr);
+	grid-template-columns: repeat(4, 1fr);
 	padding: 15px;
 	padding-right: 25px;
 	background-color: #d6d6d6;
@@ -40,7 +40,7 @@
 
 .MetodosTableRow {
 	display: grid;
-	grid-template-columns: repeat(3, 1fr);
+	grid-template-columns: repeat(4, 1fr);
 	padding-left: 15px;
 	padding-right: 25px;
 	align-items: center;
