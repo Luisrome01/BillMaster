@@ -57,6 +57,15 @@ const MetodosPago = ({ totalCosto }) => {
 		setMonto("");
 	};
 
+	const eliminarPago = (codigo) => {
+		const index = listProductos.findIndex((element) => element.codigo === codigo);
+		if (index !== -1) {
+			const updatedProductos = [...listProductos];
+			updatedProductos.splice(index, 1);
+			setListProductos(updatedProductos);
+		}
+	};
+
 	return (
 		<>
 			<div className="MetodosContainer">

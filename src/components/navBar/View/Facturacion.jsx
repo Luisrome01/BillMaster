@@ -323,6 +323,7 @@ const Facturacion = ({ setListaProductosExterna, continuarVista, listaProductosI
 					<ProductTable width="90%" height="85%" rows={listProductos} eliminarProducto={eliminarProducto} />
 				</div>
 
+
 				<div className="FacturaCheckoutContainer">
 					<BtnGeneral text="imprimirFactura" handleClick={imprimirFactura} />
 
