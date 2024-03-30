@@ -1,21 +1,20 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import BtnGeneral from "../../../components/buttons/BtnGeneral";
-import InputDiferente from "../../../components/inputs/InputDiferente";
 import CierreCajaTable from "../../../components/tables/cierreCajaTable";
 import ModalCierre from "../../modal/ModalCierre";
 import checkSVG from "../../../assets/checkmark.svg";
 
 import "./css/CierreCaja.css";
 
-const CierreCaja = () => {
+const CierreCaja = ({ responsable }) => {
     const [montoTotal, setMontoTotal] = useState("0.00");
     const [listIngresos, setListIngresos] = useState([]);
     const [listEgresos, setListEgresos] = useState([]);
     const [data, setData] = useState([]);
     const [openModal, setOpenModal] = useState(false);
     const [cantidadFacturas, setCantidadFacturas] = useState(0);
-    const [responsable, setResponsable] = useState("");
+    const [responsableState, setResponsableState] = useState(responsable);
     const [fecha, setFecha] = useState("");
     const [hora, setHora] = useState("");
 
@@ -49,35 +48,18 @@ const CierreCaja = () => {
             });
     }, []);
 
+    const handleClickCierreCaja = () => {
+        const currentDateTime = new Date();
+        const formattedDate = currentDateTime.toISOString().split("T")[0];
+        const formattedTime = currentDateTime.toLocaleTimeString();
+        setFecha(formattedDate);
+        setHora(formattedTime);
+        setOpenModal(true);
+    };
+
     return (
         <div className="CierreContainer">
-            <h1 className="CierreHeaderContainer">Filtrar factura</h1>
-
-            <div className="CierreInput">
-                <div className="CierreCierredPago">
-                    <div className="CierreCierre">
-                        <InputDiferente
-                            name="Responsable"
-                            color="#D9D9D9"
-                            width="160px"
-                            updateState={setResponsable}
-                        />
-                        <InputDiferente
-                            name="Fecha:"
-                            color="#D9D9D9"
-                            width="160px"
-                            updateState={setFecha}
-                        />
-                        <InputDiferente
-                            name="Hora:"
-                            color="#D9D9D9"
-                            width="160px"
-                            updateState={setHora}
-                        />
-                    </div>
-                </div>
-            </div>
-
+            <h2 className="CierreHeaderContainer">Este proceso cierra la caja del turno especificado:</h2>
             <div className="FacturaTableContainer">
                 <CierreCajaTable data={data} />
             </div>
@@ -135,29 +117,21 @@ const CierreCaja = () => {
                     color="#ff6060"
                     onHoverColor="#c54444"
                     img={checkSVG}
-                    handleClick={() => {
-                        if (!responsable || !fecha || !hora) {
-                            alert(
-                                "Por favor llene todos los campos antes de cerrar la caja"
-                            );
-                        } else {
-                            setOpenModal(true);
-                        }
-                    }}
+                    handleClick={handleClickCierreCaja}
                 />
-                {openModal && (
-                    <ModalCierre
-                        closeModal={setOpenModal}
-                        cantidadFacturas={cantidadFacturas}
-                        ingresos={listIngresos}
-                        egresos={listEgresos}
-                        total={montoTotal}
-                        responsable={responsable}
-                        fecha={fecha}
-                        hora={hora}
-                    />
-                )}
             </div>
+            {openModal && (
+                <ModalCierre
+                    closeModal={setOpenModal}
+                    cantidadFacturas={cantidadFacturas}
+                    ingresos={listIngresos}
+                    egresos={listEgresos}
+                    total={montoTotal}
+                    responsable={responsableState}
+                    fecha={fecha}
+                    hora={hora}
+                />
+            )}
         </div>
     );
 };

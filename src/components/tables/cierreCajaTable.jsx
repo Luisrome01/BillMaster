@@ -27,9 +27,6 @@ const CierreCajaTable = ({ width, height, color, data }) => {
 							<p>{fila.monto}</p>
 							<p>{fila.ingresos}</p>
 							<p>{fila.egresos}</p>
-							<button style={{ border: "none", backgroundColor: "transparent", paddingRight: "15px", justifyContent: "right"}}>
-								<img src={exploreSVG}></img>
-							</button>
 						</div>
 					))}
 				</div>

@@ -3,7 +3,16 @@ import BtnGeneral from "../buttons/BtnGeneral";
 import svg from "../../assets/check.svg";
 import "./css/ModalCierre.css";
 
-const ModalCierre = ({ closeModal, ingresos, egresos, total, cantidadFacturas, responsable, fecha, hora}) => {
+const ModalCierre = ({
+    closeModal,
+    ingresos,
+    egresos,
+    total,
+    cantidadFacturas,
+    responsable,
+    fecha,
+    hora,
+}) => {
     return (
         <div className="modalColor">
             <div className="modalContainer">
@@ -36,7 +45,7 @@ const ModalCierre = ({ closeModal, ingresos, egresos, total, cantidadFacturas, r
                 </div>
                 <div className="footer">
                     <div className="footerContainer">
-                        <img src={svg} />
+                        <img src={svg} alt="Check" />
                         <h4>
                             El saldo de cierre concuerda con los ingresos y
                             egresos de las transacciones.
@@ -49,8 +58,3 @@ const ModalCierre = ({ closeModal, ingresos, egresos, total, cantidadFacturas, r
 };
 
 export default ModalCierre;
-
-/*
-
-
-*/
