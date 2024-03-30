@@ -2,8 +2,20 @@ import React from "react";
 import "./css/producto.css";
 
 const Producto = ({ name, price, img, handleClick }) => {
+	const [isClicked, setIsClicked] = React.useState(false);
+
+	const handleCardClick = () => {
+		setIsClicked(true);
+		setTimeout(() => {
+			setIsClicked(false);
+		}, 100);
+		handleClick();
+	};
+
+	const cardClassName = `card ${isClicked ? "clicked" : ""}`;
+
 	return (
-		<div className="card" onClick={handleClick}>
+		<div className={cardClassName} onClick={handleCardClick}>
 			<div className="img-card">
 				<img src={img} className="imgProduct" />
 			</div>
