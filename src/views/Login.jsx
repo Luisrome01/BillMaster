@@ -61,6 +61,7 @@ const Login = ({ setUser }) => {
 						width="80%"
 						value={password}
 						onChange={(e) => setPassword(e.target.value)}
+						onEnter={handleLogin}
 					/>
 
 					{error && <p style={{ color: "red" }}>{error}</p>}

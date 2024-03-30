@@ -8,17 +8,27 @@ import svgSearch from "../../../assets/SearchSVG.svg";
 import cartSVG from "../../../assets/marketKart.svg";
 import ProductTable from "../../tables/productTable";
 
-const Facturacion = ({ setListaProductosExterna, continuarVista, listaProductosInterna }) => {
+const Facturacion = ({ setListaProductosExterna, continuarVista, listaProductosInterna, setClienteExterno, ClienteExterno }) => {
 	const [listProductos, setListProductos] = useState(listaProductosInterna);
 	const [montoTotal, setMontoTotal] = useState("0.00");
 	const [getCantidad, setCantidad] = useState(1);
 	const [getCodigo, setCodigo] = useState("");
 	const [getIdentificacion, setIdentificacion] = useState("Cedula");
-	const [getValorIdentificacion, setValorIdentificacion] = useState("");
+	const [getValorIdentificacion, setValorIdentificacion] = useState(
+		ClienteExterno
+			? ClienteExterno.ci
+				? ClienteExterno.ci
+				: ClienteExterno.pasaporte
+				? ClienteExterno.pasaporte
+				: ClienteExterno.idExtranjera
+				? ClienteExterno.idExtranjera
+				: ""
+			: ""
+	);
 	const [getClientes, setClientes] = useState([]);
-	const [getValorNombre, setValorNombre] = useState("");
-	const [getValorDireccion, setValorDireccion] = useState("");
-	const [getValorRif, setValorRif] = useState("");
+	const [getValorNombre, setValorNombre] = useState(ClienteExterno ? ClienteExterno.name : "");
+	const [getValorDireccion, setValorDireccion] = useState(ClienteExterno ? ClienteExterno.direccion : "");
+	const [getValorRif, setValorRif] = useState(ClienteExterno ? ClienteExterno.rif : "");
 	const [getValorCodigo, setValorCodigo] = useState("");
 	const [getValorCantidad, setValorCantidad] = useState("");
 	const [getName, setName] = useState("");
@@ -127,6 +137,7 @@ const Facturacion = ({ setListaProductosExterna, continuarVista, listaProductosI
 					setValorNombre(client.name);
 					setValorDireccion(client.direccion);
 					setValorRif(client.rif);
+					setClienteExterno(client);
 				} else {
 					setDisabledInput(false);
 					cleanInputs();
@@ -139,6 +150,7 @@ const Facturacion = ({ setListaProductosExterna, continuarVista, listaProductosI
 					setValorNombre(client2.name);
 					setValorDireccion(client2.direccion);
 					setValorRif(client2.rif);
+					setClienteExterno(client2);
 				} else {
 					setDisabledInput(false);
 					cleanInputs();
@@ -151,6 +163,7 @@ const Facturacion = ({ setListaProductosExterna, continuarVista, listaProductosI
 					setValorNombre(client3.name);
 					setValorDireccion(client3.direccion);
 					setValorRif(client3.rif);
+					setClienteExterno(client3);
 				} else {
 					setDisabledInput(false);
 					cleanInputs();
@@ -187,6 +200,12 @@ const Facturacion = ({ setListaProductosExterna, continuarVista, listaProductosI
 						rif: getRif,
 					},
 				]);
+				setClienteExterno({
+					ci: getValorIdentificacion,
+					name: getName,
+					direccion: getDireccion,
+					rif: getRif,
+				});
 
 				break;
 			case "Pasaporte":
@@ -199,6 +218,12 @@ const Facturacion = ({ setListaProductosExterna, continuarVista, listaProductosI
 						rif: getRif,
 					},
 				]);
+				setClienteExterno({
+					pasaporte: getValorIdentificacion,
+					name: getName,
+					direccion: getDireccion,
+					rif: getRif,
+				});
 				break;
 			case "ID Extranjero":
 				setClientes([
@@ -210,6 +235,12 @@ const Facturacion = ({ setListaProductosExterna, continuarVista, listaProductosI
 						rif: getRif,
 					},
 				]);
+				setClienteExterno({
+					idExtranjera: getValorIdentificacion,
+					name: getName,
+					direccion: getDireccion,
+					rif: getRif,
+				});
 				break;
 		}
 		setValorDireccion(getDireccion);
@@ -229,6 +260,7 @@ const Facturacion = ({ setListaProductosExterna, continuarVista, listaProductosI
 						<div className="FacturaCedula-nombre">
 							<div className="FacturaCedula">
 								<InputDinamico
+									value={getValorIdentificacion}
 									name="Cedula o Pasaporte:"
 									color="#D9D9D9"
 									width="200px"
