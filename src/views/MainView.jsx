@@ -11,7 +11,7 @@ import BtnGeneral from "../components/buttons/BtnGeneral";
 import MetodosPago from "../components/navBar/View/MetodosPago";
 import CierreCaja from "../components/navBar/View/CierreCaja";
 
-const MainView = () => {
+const MainView = ({ getUser }) => {
 	const [componenteActivo, setComponenteActivo] = useState("Facturacion");
 	const [listProductos, setListProductos] = useState([]);
 	const [totalFactura, setTotalFactura] = useState(0);
@@ -39,7 +39,7 @@ const MainView = () => {
 
 					<div className="MainUserDiv">
 						<img src={UserRound}></img>
-						<p style={{ fontWeight: "bold" }}>Bienvenido Usuario</p>
+						<p style={{ fontWeight: "bold" }}>Bienvenido {getUser}</p>
 					</div>
 				</div>
 				<div className="FactContentBottom">
