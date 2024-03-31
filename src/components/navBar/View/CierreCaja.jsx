@@ -50,8 +50,17 @@ const CierreCaja = ({ responsable }) => {
 
     const handleClickCierreCaja = () => {
         const currentDateTime = new Date();
-        const formattedDate = currentDateTime.toISOString().split("T")[0];
-        const formattedTime = currentDateTime.toLocaleTimeString();
+        const options = {
+            hour: "numeric",
+            minute: "2-digit",
+            hour12: true,
+            timeZone: "America/Caracas",
+        };
+        const formattedDate = currentDateTime.toLocaleDateString("es-AR");
+        const formattedTime = currentDateTime.toLocaleTimeString(
+            "en-US",
+            options
+        );
         setFecha(formattedDate);
         setHora(formattedTime);
         setOpenModal(true);
@@ -59,7 +68,9 @@ const CierreCaja = ({ responsable }) => {
 
     return (
         <div className="CierreContainer">
-            <h2 className="CierreHeaderContainer">Este proceso cierra la caja del turno especificado:</h2>
+            <h2 className="CierreHeaderContainer">
+                Este proceso cierra la caja del turno asignado:
+            </h2>
             <div className="FacturaTableContainer">
                 <CierreCajaTable data={data} />
             </div>
