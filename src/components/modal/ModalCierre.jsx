@@ -14,8 +14,9 @@ const ModalCierre = ({
     hora,
 }) => {
     return (
-        <div className="modalColor">
-            <div className="modalContainer">
+        <div className="modalContainer">
+            <div className="modalBackgroundBlur"></div>
+            <div className="modalContent">
                 <div className="title">
                     <h1>Resumen del cierre de caja</h1>
                     <BtnGeneral
