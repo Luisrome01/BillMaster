@@ -7,34 +7,25 @@ import svgAdd from "../../../assets/svg_add.svg";
 import svgSearch from "../../../assets/SearchSVG.svg";
 import cartSVG from "../../../assets/marketKart.svg";
 import ProductTable from "../../tables/productTable";
+import { jsPDF } from "jspdf";
 
-const Facturacion = ({ setListaProductosExterna, continuarVista, listaProductosInterna, setClienteExterno, ClienteExterno }) => {
-	const [listProductos, setListProductos] = useState(listaProductosInterna);
-	const [montoTotal, setMontoTotal] = useState("0.00");
-	const [getCantidad, setCantidad] = useState(1);
-	const [getCodigo, setCodigo] = useState("");
-	const [getIdentificacion, setIdentificacion] = useState("Cedula");
-	const [getValorIdentificacion, setValorIdentificacion] = useState(
-		ClienteExterno
-			? ClienteExterno.ci
-				? ClienteExterno.ci
-				: ClienteExterno.pasaporte
-				? ClienteExterno.pasaporte
-				: ClienteExterno.idExtranjera
-				? ClienteExterno.idExtranjera
-				: ""
-			: ""
-	);
-	const [getClientes, setClientes] = useState([]);
-	const [getValorNombre, setValorNombre] = useState(ClienteExterno ? ClienteExterno.name : "");
-	const [getValorDireccion, setValorDireccion] = useState(ClienteExterno ? ClienteExterno.direccion : "");
-	const [getValorRif, setValorRif] = useState(ClienteExterno ? ClienteExterno.rif : "");
-	const [getValorCodigo, setValorCodigo] = useState("");
-	const [getValorCantidad, setValorCantidad] = useState("");
-	const [getName, setName] = useState("");
-	const [getDireccion, setDireccion] = useState("");
-	const [getRif, setRif] = useState("");
-	const [disabledInput, setDisabledInput] = useState(false);
+const Facturacion = ({ setListaProductosExterna, continuarVista, listaProductosInterna }) => {
+    const [listProductos, setListProductos] = useState(listaProductosInterna);
+    const [montoTotal, setMontoTotal] = useState("0.00");
+    const [getCantidad, setCantidad] = useState(1);
+    const [getCodigo, setCodigo] = useState("");
+    const [getIdentificacion, setIdentificacion] = useState("Cedula");
+    const [getValorIdentificacion, setValorIdentificacion] = useState("");
+    const [getClientes, setClientes] = useState([]);
+    const [getValorNombre, setValorNombre] = useState("");
+    const [getValorDireccion, setValorDireccion] = useState("");
+    const [getValorRif, setValorRif] = useState("");
+    const [getValorCodigo, setValorCodigo] = useState("");
+    const [getValorCantidad, setValorCantidad] = useState("");
+    const [getName, setName] = useState("");
+    const [getDireccion, setDireccion] = useState("");
+    const [getRif, setRif] = useState("");
+    const [disabledInput, setDisabledInput] = useState(false);
 
 	useEffect(() => {
 		fetch("/src/json/clientes.json")
@@ -250,6 +241,20 @@ const Facturacion = ({ setListaProductosExterna, continuarVista, listaProductosI
 		alert("Cliente creado con exito");
 	};
 
+	const generarPDF = () => {
+        const doc = new jsPDF();
+        doc.text("Factura", 10, 10);
+        doc.text("Nombre: " + getValorNombre, 10, 20);
+        doc.text("Dirección: " + getValorDireccion, 10, 30);
+        doc.text("RIF: " + getValorRif, 10, 40);
+        doc.text("Productos:", 10, 50);
+        listProductos.forEach((producto, index) => {
+            doc.text(`${index + 1}. ${producto.descripcion} - Cantidad: ${producto.cantidad} - Precio: ${producto.total}`, 10, 60 + (index * 10));
+        });
+        doc.text("Total: $" + montoTotal, 10, 60 + (listProductos.length * 10));
+        doc.save("factura.pdf");
+    };
+
 	return (
 		<>
 			<div className="FacturaContainer">
@@ -390,6 +395,13 @@ const Facturacion = ({ setListaProductosExterna, continuarVista, listaProductosI
 							else alert("No hay productos en la factura");
 						}}
 					/>
+					<BtnGeneral
+                        text="Generar PDF"
+                        width="140px"
+                        color="#3cb371"
+                        onHoverColor="#2e8b57"
+                        handleClick={generarPDF}
+                    />
 				</div>
 			</div>
 		</>
