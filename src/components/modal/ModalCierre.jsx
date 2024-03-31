@@ -38,7 +38,7 @@ const ModalCierre = ({
                             <p>Hora: {hora}</p>
                         </div>
                         <p className="Estadistica">Estadística</p>
-                        <p>Factura realizadas: {cantidadFacturas}</p>
+                        <p>Facturas realizadas: {cantidadFacturas}</p>
                         <p>Saldo de cierre: ${total}</p>
                         <p>Ingresos: ${ingresos}</p>
                         <p>Egresos: ${egresos}</p>

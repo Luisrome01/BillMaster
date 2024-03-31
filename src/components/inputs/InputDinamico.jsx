@@ -33,7 +33,7 @@ function InputDinamico({ width, height, color, onBlur, onTypeChange, onValueChan
 			<p className="IDIFTitle">{tipoDocumento}</p>
 			<select value={tipoDocumento} onChange={handleTipoDocumentoChange} className="IDIFSelect">
 				<option value="ID Extranjero">ID Extranjero</option>
-				<option value="Cedula">Cédula de Identidad</option>
+				<option value="Cédula">Cédula de Identidad</option>
 				<option value="Pasaporte">Pasaporte</option>
 			</select>
 			{tipoDocumento && (
@@ -45,7 +45,7 @@ function InputDinamico({ width, height, color, onBlur, onTypeChange, onValueChan
 						id={id}
 						value={valorDocumento}
 						onChange={handleValorDocumentoChange}
-						placeholder={`Ingrese el ${tipoDocumento === "Cedula" ? "Cédula" : "Pasaporte"}`}
+						placeholder={`Ingrese el número de documento`}
 						onBlur={onBlur ? onBlur : undefined}
 					/>
 				</div>

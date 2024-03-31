@@ -47,7 +47,7 @@ const NavBar = ({ componenteActivo, setComponenteActivo }) => {
 				<h1 className="NavBarTitle">Bill Master</h1>
 			</div>
 			<div className="NavContent">
-				<h2 style={{ color: "#A4A4A5" }}>MENU PRINCIPAL</h2>
+				<h2 style={{ color: "#A4A4A5" }}>MENÚ PRINCIPAL</h2>
 				<div
 					className="nav-link"
 					onClick={() => setComponenteActivo("Productos")}

@@ -16,8 +16,8 @@ const ProductTable = ({ width, height, color, rows, eliminarProducto }) => {
 			<div className="ProductTableWrapper">
 				<div className="ProductTableHeader">
 					<p></p>
-					<p style={{ justifySelf: "left" }}>Codigo del producto</p>
-					<p>Descripcion</p>
+					<p style={{ justifySelf: "left" }}>Código del producto</p>
+					<p>Descripción</p>
 					<p>Cantidad</p>
 					<p>Precio/Unidad</p>
 					<p>IVA</p>
