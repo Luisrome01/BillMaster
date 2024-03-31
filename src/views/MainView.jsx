@@ -10,68 +10,66 @@ import MetodosPago from "../components/navBar/View/MetodosPago";
 import CierreCaja from "../components/navBar/View/CierreCaja";
 
 const MainView = ({ getUser }) => {
-    const [componenteActivo, setComponenteActivo] = useState("Facturacion");
-    const [listProductos, setListProductos] = useState([]);
-    const [totalFactura, setTotalFactura] = useState(0);
-    const [cliente, setCliente] = useState({});
+	const [componenteActivo, setComponenteActivo] = useState("Facturacion");
+	const [listProductos, setListProductos] = useState([]);
+	const [totalFactura, setTotalFactura] = useState(0);
+	const [cliente, setCliente] = useState({});
 
-    useEffect(() => {
-        let total = 0;
-        listProductos.forEach((producto) => {
-            total += producto.total;
-        });
-        setTotalFactura(total);
-    }, [listProductos]);
+	useEffect(() => {
+		let total = 0;
+		listProductos.forEach((producto) => {
+			total += producto.total;
+		});
+		setTotalFactura(total);
+	}, [listProductos]);
 
-    const cambiarMetodoPago = () => {
-        setComponenteActivo("Metodos de Pago");
-    };
+	const cambiarMetodoPago = () => {
+		setComponenteActivo("Metodos de Pago");
+	};
+	const cambiarFacturacion = () => {
+		setComponenteActivo("Facturacion");
+	};
 
-    return (
-        <div className="MainContainer">
-            <div className="MainNavContainer">
-                <NavBar
-                    componenteActivo={componenteActivo}
-                    setComponenteActivo={setComponenteActivo}
-                />
-            </div>
-            <div className="MainContentContainer">
-                <div className="MainContentTop">
-                    <h1 className="MainTitle">{componenteActivo}</h1>
+	return (
+		<div className="MainContainer">
+			<div className="MainNavContainer">
+				<NavBar componenteActivo={componenteActivo} setComponenteActivo={setComponenteActivo} />
+			</div>
+			<div className="MainContentContainer">
+				<div className="MainContentTop">
+					<h1 className="MainTitle">{componenteActivo}</h1>
 
-                    <div className="MainUserDiv">
-                        <img src={UserRound}></img>
-                        <p style={{ fontWeight: "bold" }}>
-                            Bienvenido {getUser}
-                        </p>
-                    </div>
-                </div>
-                <div className="FactContentBottom">
-                    {componenteActivo === "Productos" && (
-                        <Productos
-                            setListaProductos={setListProductos}
-                            listaProductos={listProductos}
-                        />
-                    )}
-                    {componenteActivo === "Facturacion" && (
-                        <Facturacion
-                            listaProductosInterna={listProductos}
-                            setListaProductosExterna={setListProductos}
-                            continuarVista={cambiarMetodoPago}
-                            ClienteExterno={cliente}
-                            setClienteExterno={setCliente}
-                        />
-                    )}
-                    {componenteActivo === "Metodos de Pago" && (
-                        <MetodosPago totalCosto={totalFactura.toFixed(2)} />
-                    )}
-                    {componenteActivo === "Cierre de Caja" && (
-                        <CierreCaja responsable={getUser} />
-                    )}
-                </div>
-            </div>
-        </div>
-    );
+					<div className="MainUserDiv">
+						<img src={UserRound}></img>
+						<p style={{ fontWeight: "bold" }}>Bienvenido {getUser}</p>
+					</div>
+				</div>
+				<div className="FactContentBottom">
+					{componenteActivo === "Productos" && <Productos setListaProductos={setListProductos} listaProductos={listProductos} />}
+					{componenteActivo === "Facturacion" && (
+						<Facturacion
+							listaProductosInterna={listProductos}
+							setListaProductosExterna={setListProductos}
+							continuarVista={cambiarMetodoPago}
+							ClienteExterno={cliente}
+							setClienteExterno={setCliente}
+						/>
+					)}
+					{componenteActivo === "Metodos de Pago" && (
+						<MetodosPago
+							totalCosto={totalFactura.toFixed(2)}
+							listaProductos={listProductos}
+							cliente={cliente}
+							setClienteExterno={setCliente}
+							setListaProductosExterna={setListProductos}
+							continuarVista={cambiarFacturacion}
+						/>
+					)}
+					{componenteActivo === "Cierre de Caja" && <CierreCaja responsable={getUser} />}
+				</div>
+			</div>
+		</div>
+	);
 };
 
 export default MainView;

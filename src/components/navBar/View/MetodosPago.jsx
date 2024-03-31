@@ -7,7 +7,9 @@ import InputDiferente from "../../../components/inputs/InputDiferente";
 import svgAdd from "../../../assets/svg_add.svg";
 import cartSVG from "../../../assets/marketKart.svg";
 import MetodosTable from "../../tables/MetodosTable";
-const MetodosPago = ({ totalCosto }) => {
+import { jsPDF } from "jspdf";
+
+const MetodosPago = ({ totalCosto, listaProductos, cliente, setClienteExterno, setListaProductosExterna, continuarVista }) => {
 	const [montoTotal, setMontoTotal] = useState(totalCosto ? totalCosto : "0.00");
 	const [montoPagado, setMontoPagado] = useState("0.00");
 	const [listMetodosPago, setListMetodosPago] = useState([]);
@@ -42,6 +44,10 @@ const MetodosPago = ({ totalCosto }) => {
 					setBanco("NO APLICABLE");
 					valido = false;
 				}
+				if (!metodoPago) {
+					alert("Por favor seleccione un metodo de pago");
+					valido = false;
+				}
 				break;
 		}
 		if (!valido) return;
@@ -57,13 +63,68 @@ const MetodosPago = ({ totalCosto }) => {
 		setMonto("");
 	};
 
-	const eliminarPago = (codigo) => {
-		const index = listProductos.findIndex((element) => element.codigo === codigo);
-		if (index !== -1) {
-			const updatedProductos = [...listProductos];
-			updatedProductos.splice(index, 1);
-			setListProductos(updatedProductos);
-		}
+	const eliminarPago = (index) => {
+		setMontoPagado((prev) => (parseFloat(prev) - listMetodosPago[index].monto).toFixed(2));
+		const newList = listMetodosPago.filter((_, i) => i !== index);
+		setListMetodosPago(newList);
+	};
+
+	const generarPDF = ({ codigoFactura, nombre, tipoIdentificacion, identificacion, direccion, rif, listaProductos = [] }) => {
+		const doc = new jsPDF();
+		doc.setFontSize(16);
+		doc.setFont("Courier", "bold");
+		doc.text("SENIAN'T", 90, 10);
+		doc.setFont("Courier", "normal");
+		doc.text("BillMaster. C.A.", 78, 20);
+		doc.text("billmaster calle 123", 68, 30);
+		doc.text("Tierra Negra, Mcbo, Edo. Zulia", 53, 40);
+
+		doc.setFontSize(13);
+		doc.text("RIF: J-123456789", 10, 50);
+		doc.text("Fecha: " + new Date().toLocaleDateString(), 10, 60);
+		doc.text("COD DE FACTURA: " + codigoFactura, 80, 60);
+		doc.text("------------------------ INFORMACION DEL CONSUMIDOR ------------------------", 0, 75);
+		doc.text("NOMBRE: " + nombre, 10, 85);
+		doc.text(tipoIdentificacion + ": " + identificacion, 10, 95);
+		doc.text("DIRECCION: " + direccion, 10, 105);
+		doc.text("RIF: " + rif, 10, 115);
+		doc.text("--------------------------------- FACTURA ---------------------------------", 0, 130);
+		let index = 140;
+		let total_preIVA = 0;
+		let total_iva = 0;
+		listaProductos.forEach((producto) => {
+			doc.text(`${producto.descripcion}`, 30, index);
+			doc.text(`ref. ${producto.precio.toFixed(2)}`, 150, index);
+			doc.text(`x${producto.cantidad}`, 185, index);
+			index += 10;
+			total_preIVA += producto.precio * producto.cantidad;
+			total_iva += producto.iva * producto.cantidad;
+			if (index > doc.internal.pageSize.height) {
+				doc.addPage();
+				index = 10;
+			}
+		});
+		const nextText = [
+			{ text: "----------------------------------- TOTAL ----------------------------------", x: 0 },
+			{ text: `MONTO NETO:                                        ref. ${total_preIVA.toFixed(2)}`, x: 10 },
+			{ text: `IVA:                                               ref. ${total_iva.toFixed(2)}`, x: 10 },
+			{ text: `MONTO TOTAL:                                       ref. ${(total_preIVA + total_iva).toFixed(2)}`, x: 10 },
+			{ text: "----------------------------------------------------------------------------", x: 0 },
+			{ text: "NO. DE DOCUMENTO: 02047411", x: 10 },
+			{ text: "GRACIAS POR SU COMPRA", x: 10 },
+			{ text: "----------------------------- BILLMASTER. C.A. -----------------------------", x: 0 },
+			{ text: "TIENDA: 001                                              CAJA: 001", x: 10 },
+		];
+		nextText.forEach((element) => {
+			index += 10;
+			if (index > doc.internal.pageSize.height) {
+				doc.addPage();
+				index = 10;
+			}
+			doc.text(element.text, element.x, index);
+		});
+
+		doc.save("factura.pdf");
 	};
 
 	return (
@@ -95,7 +156,7 @@ const MetodosPago = ({ totalCosto }) => {
 				</div>
 
 				<div className="MetodosPagoTableContainer">
-					<MetodosTable data={listMetodosPago} />
+					<MetodosTable data={listMetodosPago} eliminarPago={eliminarPago} />
 				</div>
 
 				<div className="MetodosCheckoutContainer">
@@ -109,7 +170,39 @@ const MetodosPago = ({ totalCosto }) => {
 							Faltante: $ {(parseFloat(montoTotal) - listMetodosPago.reduce((acc, curr) => acc + curr.monto, 0)).toFixed(2) || "0.00"}
 						</p>
 					</div>
-					<BtnGeneral text="Checkout" width="140px" color="#ff6060" onHoverColor="#c54444" img={cartSVG} />
+					<BtnGeneral
+						text="Checkout"
+						width="140px"
+						color="#ff6060"
+						onHoverColor="#c54444"
+						img={cartSVG}
+						handleClick={() => {
+							if (parseFloat(montoTotal) - listMetodosPago.reduce((acc, curr) => acc + curr.monto, 0) > 0) {
+								alert("Faltan pagos por realizar");
+								return;
+							}
+							if (!cliente || !cliente.name || !cliente.identificacion || !cliente.direccion || !cliente.rif) {
+								alert("Por favor ingrese un cliente");
+								return;
+							}
+							if (listaProductos.length === 0) {
+								alert("Por favor ingrese productos");
+								return;
+							}
+							generarPDF({
+								codigoFactura: "2548574",
+								nombre: cliente.name,
+								tipoIdentificacion: cliente.identificationType,
+								identificacion: cliente.identificacion,
+								direccion: cliente.direccion,
+								rif: cliente.rif,
+								listaProductos: listaProductos,
+							});
+							setListaProductosExterna([]);
+							setClienteExterno({});
+							continuarVista();
+						}}
+					/>
 				</div>
 			</div>
 		</>

@@ -62,6 +62,7 @@ const Productos = ({ setListaProductos, listaProductos }) => {
 			<div className="containerCard">
 				{productos.map((producto, index) => (
 					<Producto
+						key={producto.codigo}
 						name={producto.name}
 						price={producto.price}
 						img={producto.img}

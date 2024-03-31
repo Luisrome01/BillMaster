@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "./css/MetodosTable.css";
 import trashbinSVG from "../../assets/trashbin.svg";
-const MetodosTable = ({ width, height, color, data, eliminarPago}) => {
+const MetodosTable = ({ width, height, color, data, eliminarPago }) => {
 	const style = {
 		width: width ? width : "90%",
 		height: height ? height : "85%",
@@ -11,7 +11,6 @@ const MetodosTable = ({ width, height, color, data, eliminarPago}) => {
 		<div style={style} className="MetodosTableContainer">
 			<div className="MetodosTableWrapper">
 				<div className="MetodosTableHeader">
-				
 					<p>Metodo de Pago</p>
 					<p>Banco</p>
 					<p>Monto</p>
@@ -25,7 +24,8 @@ const MetodosTable = ({ width, height, color, data, eliminarPago}) => {
 							<p>{fila.monto}</p>
 							<button
 								style={{ justifySelf: "left", border: "none", backgroundColor: "transparent" }}
-								>
+								onClick={() => eliminarPago(index)}
+							>
 								<img src={trashbinSVG}></img>
 							</button>
 						</div>

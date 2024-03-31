@@ -1,46 +1,46 @@
 {
-    "data" : [
-        {
-            "id": 2548568,
-            "date": "26/03/2024",
-            "monto": 25,
-            "ingresos": 30,
-            "egresos": 5
-        },
-        {
-            "id": 2548568,
-            "date": "26/03/2024",
-            "monto": 50,
-            "ingresos": 50,
-            "egresos": 0
-        },
-        {
-            "id": 2548568,
-            "date": "26/03/2024",
-            "monto": 15,
-            "ingresos": 20,
-            "egresos": 5
-        },
-        {
-            "id": 2548568,
-            "date": "26/03/2024",
-            "monto": 20,
-            "ingresos": 20,
-            "egresos": 0
-        },
-        {
-            "id": 2548568,
-            "date": "26/03/2024",
-            "monto": 100,
-            "ingresos": 100,
-            "egresos": 0
-        },
-        {
-            "id": 2548568,
-            "date": "26/03/2024",
-            "monto": 40,
-            "ingresos": 50,
-            "egresos": 10
-        }
-    ]
+	"data": [
+		{
+			"id": 2548568,
+			"date": "26/03/2024",
+			"monto": 25,
+			"ingresos": 30,
+			"egresos": 5
+		},
+		{
+			"id": 2548569,
+			"date": "26/03/2024",
+			"monto": 50,
+			"ingresos": 50,
+			"egresos": 0
+		},
+		{
+			"id": 2548570,
+			"date": "26/03/2024",
+			"monto": 15,
+			"ingresos": 20,
+			"egresos": 5
+		},
+		{
+			"id": 2548571,
+			"date": "26/03/2024",
+			"monto": 20,
+			"ingresos": 20,
+			"egresos": 0
+		},
+		{
+			"id": 2548572,
+			"date": "26/03/2024",
+			"monto": 100,
+			"ingresos": 100,
+			"egresos": 0
+		},
+		{
+			"id": 2548573,
+			"date": "26/03/2024",
+			"monto": 40,
+			"ingresos": 50,
+			"egresos": 10
+		}
+	]
 }
