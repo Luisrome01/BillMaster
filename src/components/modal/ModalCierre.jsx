@@ -1,4 +1,5 @@
 import React from "react";
+import {Link} from "react-router-dom";
 import BtnGeneral from "../buttons/BtnGeneral";
 import svg from "../../assets/check.svg";
 import "./css/ModalCierre.css";
@@ -19,16 +20,15 @@ const ModalCierre = ({
             <div className="modalContent">
                 <div className="title">
                     <h1>Resumen del cierre de caja</h1>
+                    <Link to="/">
                     <BtnGeneral
                         text="X"
                         width="40px"
                         height="40px"
                         color="#FF6060"
                         bgColor="#FF0000"
-                        handleClick={() => {
-                            closeModal(false);
-                        }}
                     />
+                    </Link>
                 </div>
                 <div className="body">
                     <div className="bodyContainer">
