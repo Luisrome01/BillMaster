@@ -8,7 +8,6 @@ const Router = () => {
 	return (
 		<>
 			<Routes>
-				{/* <Route path='/' element={<></>} /> */}
 				<Route path="/" element={<Login setUser={setUser} />} />
 				<Route path="/main" element={<MainView getUser={user ? user.name : "Usuario"} />} />
 			</Routes>

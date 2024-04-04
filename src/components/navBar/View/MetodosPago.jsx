@@ -80,7 +80,7 @@ const MetodosPago = ({ totalCosto, listaProductos, cliente, setClienteExterno, s
 		doc.text("Tierra Negra, Mcbo, Edo. Zulia", 53, 40);
 
 		doc.setFontSize(13);
-		doc.text("RIF: J-123456789", 10, 50);
+		doc.text("RIF: J-0123456789", 10, 50);
 		doc.text("Fecha: " + new Date().toLocaleDateString(), 10, 60);
 		doc.text("COD DE FACTURA: " + codigoFactura, 80, 60);
 		doc.text("------------------------ INFORMACION DEL CONSUMIDOR ------------------------", 0, 75);
