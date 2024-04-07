@@ -1,10 +1,11 @@
 import React, { useState } from "react";
 import "./css/InputMetodosPago.css";
 
-function InputMetodosPago({ width, height, color, padding, boderRadius, valorMetodoPago, valorBanco }) {
+function InputMetodosPago({ width, height, color, padding, boderRadius, valorMetodoPago, valorBanco, valorPunto }) {
 	// Estado para almacenar el tipo de documento seleccionado y el valor ingresado
 	const [tipoDocumento, setTipoDocumento] = useState("Metodo de pago:");
 	const [tipoBanco, setTipoBanco] = useState("Banco: ");
+	const [numeroPunto, setNumeroPunto] = useState("Numero del punto: ");
 	const [valorDocumento, setValorDocumento] = useState("");
 
 	// Función para manejar cambios en la selección del tipo de documento
@@ -23,6 +24,11 @@ function InputMetodosPago({ width, height, color, padding, boderRadius, valorMet
 
 	const handleValorBancoChange = (event) => {
 		setTipoBanco(event.target.value);
+	};
+
+	const handleNumeroPuntoChange = (event) => {
+		setNumeroPunto(event.target.value);
+		valorPunto(event.target.value);
 	};
 
 	const style = {
@@ -60,12 +66,28 @@ function InputMetodosPago({ width, height, color, padding, boderRadius, valorMet
 					className="IDIFSelect"
 					disabled={tipoDocumento === "TRANSFERENCIA" || tipoDocumento === "TARJETA" ? false : true}
 				>
-					<option value="Banco:" hidden={true}>
+					<option value="Banco Origen:" hidden={true}>
 						Banco
 					</option>
 					<option value="BANESCO">BANESCO</option>
 					<option value="MERCANTIL">MERCANTIL</option>
 					<option value="BANCARIBE">BANCARIBE</option>
+				</select>
+				<p className="IDIFTitle" style={style}>
+					{numeroPunto}
+				</p>
+				<select
+					value={numeroPunto}
+					onChange={handleNumeroPuntoChange}
+					className="IDIFSelect"
+					disabled={tipoDocumento === "TARJETA" ? false : true}
+				>
+					<option value="Numero del punto: " hidden={true}>
+						Metodo de Pago:
+					</option>
+					<option value="PUNTO 1">PUNTO 1</option>
+					<option value="PUNTO 2">PUNTO 2</option>
+					<option value="PUNTO 3">PUNTO 3</option>
 				</select>
 			</div>
 		</div>

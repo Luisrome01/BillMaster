@@ -8,22 +8,18 @@ import svgAdd from "../../../assets/svg_add.svg";
 import cartSVG from "../../../assets/marketKart.svg";
 import MetodosTable from "../../tables/MetodosTable";
 import { jsPDF } from "jspdf";
-import {
-    showErrorMessage,
-    showSuccessMessage,
-    showWarningMessage,
-    showInfoMessage
-} from "../../messageBar/MessageBar";
+import { showErrorMessage, showSuccessMessage, showWarningMessage, showInfoMessage } from "../../messageBar/MessageBar";
 
 const MetodosPago = ({ totalCosto, listaProductos, cliente, setClienteExterno, setListaProductosExterna, continuarVista }) => {
 	const [montoTotal, setMontoTotal] = useState(totalCosto ? totalCosto : "0.00");
 	const [montoPagado, setMontoPagado] = useState("0.00");
 	const [listMetodosPago, setListMetodosPago] = useState([]);
 	const [metodoPago, setMetodoPago] = useState("");
+	const [numeroPunto, setNumeroPunto] = useState("");
 	const [banco, setBanco] = useState("");
 	const [monto, setMonto] = useState("");
 	const [message, setMessage] = useState({});
-	
+
 	const MESSAGE_DURATION = 3000;
 
 	useEffect(() => {
@@ -36,7 +32,7 @@ const MetodosPago = ({ totalCosto, listaProductos, cliente, setClienteExterno, s
 		return () => clearTimeout(messageTimer);
 	}, [message]);
 
-	const agregarMetodoPago = () => {
+	const agregarMetodoPago = (numero) => {
 		let valido = true;
 		function revisarCampos() {
 			if (monto === "") {
@@ -47,15 +43,19 @@ const MetodosPago = ({ totalCosto, listaProductos, cliente, setClienteExterno, s
 				setMessage({ text: "Por favor seleccione un banco", severity: "warning" });
 				return false;
 			}
+			if (numero === 1 && (numeroPunto === "" || numeroPunto === "Numero del punto:")) {
+				setMessage({ text: "Por favor ingrese un numero de punto", severity: "warning" });
+				return false;
+			}
 			return true;
 		}
 
 		switch (metodoPago) {
 			case "TRANSFERENCIA":
-				valido = revisarCampos();
+				valido = revisarCampos(0);
 				break;
 			case "TARJETA":
-				valido = revisarCampos();
+				valido = revisarCampos(1);
 				break;
 			default:
 				if (monto === "" || monto === "0.00" || monto === "0") {
@@ -76,6 +76,7 @@ const MetodosPago = ({ totalCosto, listaProductos, cliente, setClienteExterno, s
 				metodosPago: metodoPago,
 				banco: metodoPago === "TRANSFERENCIA" || metodoPago === "TARJETA" ? banco : "NO APLICA",
 				monto: parseFloat(monto),
+				numeroPunto: metodoPago === "TARJETA" ? numeroPunto : "NO APLICA",
 			},
 		]);
 		setMontoPagado((prev) => (parseFloat(prev) + parseFloat(monto)).toFixed(2));
@@ -150,13 +151,13 @@ const MetodosPago = ({ totalCosto, listaProductos, cliente, setClienteExterno, s
 		<>
 			<div className="MetodosContainer">
 				{message && (
-                    <div className="message-bar-wrapper">
-                        {message.severity === "success" && showSuccessMessage(message.text, "left")}
-                        {message.severity === "error" && showErrorMessage(message.text, "left")}
-                        {message.severity === "warning" && showWarningMessage(message.text, "left")}
-                        {message.severity === "info" && showInfoMessage(message.text, "left")}
-                    </div>
-            	)}
+					<div className="message-bar-wrapper">
+						{message.severity === "success" && showSuccessMessage(message.text, "left")}
+						{message.severity === "error" && showErrorMessage(message.text, "left")}
+						{message.severity === "warning" && showWarningMessage(message.text, "left")}
+						{message.severity === "info" && showInfoMessage(message.text, "left")}
+					</div>
+				)}
 				<h1 className="MetodosHeaderContainer">Agregar metodos de pago</h1>
 				<div className="MetodosInput">
 					<div className="MetodoMetododPago">
@@ -169,6 +170,7 @@ const MetodosPago = ({ totalCosto, listaProductos, cliente, setClienteExterno, s
 							height={"20%"}
 							valorMetodoPago={setMetodoPago}
 							valorBanco={setBanco}
+							valorPunto={setNumeroPunto}
 						/>
 					</div>
 

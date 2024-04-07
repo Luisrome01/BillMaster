@@ -14,6 +14,7 @@ const MetodosTable = ({ width, height, color, data, eliminarPago }) => {
 					<p>Metodo de Pago</p>
 					<p>Banco</p>
 					<p>Monto</p>
+					<p>Numero de Punto</p>
 					<p></p>
 				</div>
 				<div className="MetodosTableBody">
@@ -22,8 +23,9 @@ const MetodosTable = ({ width, height, color, data, eliminarPago }) => {
 							<p>{fila.metodosPago}</p>
 							<p>{fila.banco}</p>
 							<p>{fila.monto}</p>
+							<p>{fila.numeroPunto}</p>
 							<button
-								style={{ justifySelf: "left", border: "none", backgroundColor: "transparent" }}
+								style={{ justifySelf: "center", border: "none", backgroundColor: "transparent" }}
 								onClick={() => eliminarPago(index)}
 							>
 								<img src={trashbinSVG}></img>
