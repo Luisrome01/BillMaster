@@ -111,6 +111,12 @@ const CierreCaja = ({ responsable }) => {
 		setOpenModal(true);
 	};
 
+	const blockCaja = () => {
+		const currentDateTime = new Date();
+		localStorage.setItem("cajaBloqueada", "true");
+		localStorage.setItem("blockedDate", currentDateTime.toLocaleDateString("es-AR"));
+	};
+
 	return (
 		<div className="CierreContainer">
 			<h2 className="CierreHeaderContainer">Este proceso cierra la caja del turno asignado:</h2>
@@ -176,7 +182,7 @@ const CierreCaja = ({ responsable }) => {
 			</div>
 			{openModal && (
 				<ModalCierre
-					closeModal={setOpenModal}
+					closeModal={blockCaja}
 					cantidadFacturas={cantidadFacturas}
 					ingresos={listIngresos}
 					ingresosEfectivo={ingresosEfectivo}

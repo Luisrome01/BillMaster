@@ -16,6 +16,30 @@ const Login = ({ setUser }) => {
 	const handleLogin = () => {
 		setError("");
 
+		if (localStorage.getItem("cajaBloqueada")) {
+			const currentDate = new Date();
+			if (localStorage.getItem("blockedDate") === currentDate.toLocaleDateString("es-AR")) {
+				setError(
+					`La caja está bloqueada, se desbloquea el dia ${currentDate.getDate() + 1}/${
+						currentDate.getMonth() + 1
+					}/${currentDate.getFullYear()} a las 06:00.`
+				);
+				return;
+			} else {
+				const currentDate = new Date();
+				if (currentDate.getHours() < 6) {
+					setError(
+						`La caja está bloqueada, se desbloquea el dia ${currentDate.getDate()}/${
+							currentDate.getMonth() + 1
+						}/${currentDate.getFullYear()} a las 06:00.`
+					);
+					return;
+				}
+				localStorage.removeItem("cajaBloqueada");
+				localStorage.removeItem("blockedDate");
+			}
+		}
+
 		if (!email || !password) {
 			setError("Por favor ingresa correo electrónico y contraseña.");
 			return;

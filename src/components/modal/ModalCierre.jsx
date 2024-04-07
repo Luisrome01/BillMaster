@@ -5,6 +5,7 @@ import svg from "../../assets/check.svg";
 import "./css/ModalCierre.css";
 
 const ModalCierre = ({
+	closeModal,
 	ingresos,
 	ingresosEfectivo,
 	ingresosDivisas,
@@ -27,9 +28,9 @@ const ModalCierre = ({
 			<div className="modalContent">
 				<div className="title">
 					<h1>Resumen del cierre de caja</h1>
-					{/*  <Link to="/" style={{ textDecoration: "none" }}> */}
-					<BtnGeneral gap="0" text="X" width="40px" height="40px" color="#FF6060" bgColor="#FF0000" />
-					{/*  </Link> */}
+					<Link to="/" style={{ textDecoration: "none" }}>
+						<BtnGeneral gap="0" text="X" width="40px" height="40px" color="#FF6060" bgColor="#FF0000" handleClick={closeModal} />
+					</Link>
 				</div>
 				<div className="body">
 					<div className="bodyContainer">
