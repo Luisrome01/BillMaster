@@ -8,6 +8,12 @@ import svgAdd from "../../../assets/svg_add.svg";
 import cartSVG from "../../../assets/marketKart.svg";
 import MetodosTable from "../../tables/MetodosTable";
 import { jsPDF } from "jspdf";
+import {
+    showErrorMessage,
+    showSuccessMessage,
+    showWarningMessage,
+    showInfoMessage
+} from "../../messageBar/MessageBar";
 
 const MetodosPago = ({ totalCosto, listaProductos, cliente, setClienteExterno, setListaProductosExterna, continuarVista }) => {
 	const [montoTotal, setMontoTotal] = useState(totalCosto ? totalCosto : "0.00");
@@ -16,16 +22,29 @@ const MetodosPago = ({ totalCosto, listaProductos, cliente, setClienteExterno, s
 	const [metodoPago, setMetodoPago] = useState("");
 	const [banco, setBanco] = useState("");
 	const [monto, setMonto] = useState("");
+	const [message, setMessage] = useState({});
+	
+	const MESSAGE_DURATION = 3000;
+
+	useEffect(() => {
+		let messageTimer;
+		if (message.text) {
+			messageTimer = setTimeout(() => {
+				setMessage({});
+			}, MESSAGE_DURATION);
+		}
+		return () => clearTimeout(messageTimer);
+	}, [message]);
 
 	const agregarMetodoPago = () => {
 		let valido = true;
 		function revisarCampos() {
 			if (monto === "") {
-				alert("Por favor ingrese un monto");
+				setMessage({ text: "Por favor ingrese un monto", severity: "warning" });
 				return false;
 			}
 			if (banco === "" || banco === "Banco:") {
-				alert("Por favor seleccione un banco");
+				setMessage({ text: "Por favor seleccione un banco", severity: "warning" });
 				return false;
 			}
 			return true;
@@ -40,12 +59,12 @@ const MetodosPago = ({ totalCosto, listaProductos, cliente, setClienteExterno, s
 				break;
 			default:
 				if (monto === "" || monto === "0.00" || monto === "0") {
-					alert("Por favor ingrese un monto");
+					setMessage({ text: "Por favor ingrese un monto", severity: "warning" });
 					setBanco("NO APLICABLE");
 					valido = false;
 				}
 				if (!metodoPago) {
-					alert("Por favor seleccione un metodo de pago");
+					setMessage({ text: "Por favor seleccione un metodo de pago", severity: "warning" });
 					valido = false;
 				}
 				break;
@@ -130,6 +149,14 @@ const MetodosPago = ({ totalCosto, listaProductos, cliente, setClienteExterno, s
 	return (
 		<>
 			<div className="MetodosContainer">
+				{message && (
+                    <div className="message-bar-wrapper">
+                        {message.severity === "success" && showSuccessMessage(message.text, "left")}
+                        {message.severity === "error" && showErrorMessage(message.text, "left")}
+                        {message.severity === "warning" && showWarningMessage(message.text, "left")}
+                        {message.severity === "info" && showInfoMessage(message.text, "left")}
+                    </div>
+            	)}
 				<h1 className="MetodosHeaderContainer">Agregar metodos de pago</h1>
 				<div className="MetodosInput">
 					<div className="MetodoMetododPago">
@@ -178,15 +205,15 @@ const MetodosPago = ({ totalCosto, listaProductos, cliente, setClienteExterno, s
 						img={cartSVG}
 						handleClick={() => {
 							if (parseFloat(montoTotal) - listMetodosPago.reduce((acc, curr) => acc + curr.monto, 0) > 0) {
-								alert("Faltan pagos por realizar");
+								setMessage({ text: "Faltan pagos por realizar", severity: "error" });
 								return;
 							}
 							if (!cliente || !cliente.name || !cliente.identificacion || !cliente.direccion || !cliente.rif) {
-								alert("Por favor ingrese un cliente");
+								setMessage({ text: "Por favor ingrese un cliente", severity: "warning" });
 								return;
 							}
 							if (listaProductos.length === 0) {
-								alert("Por favor ingrese productos");
+								setMessage({ text: "Por favor ingrese productos", severity: "warning" });
 								return;
 							}
 							generarPDF({

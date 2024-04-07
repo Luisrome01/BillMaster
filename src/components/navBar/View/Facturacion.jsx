@@ -7,7 +7,12 @@ import svgAdd from "../../../assets/svg_add.svg";
 import svgSearch from "../../../assets/SearchSVG.svg";
 import cartSVG from "../../../assets/marketKart.svg";
 import ProductTable from "../../tables/productTable";
-import { jsPDF } from "jspdf";
+import {
+    showErrorMessage,
+    showSuccessMessage,
+    showWarningMessage,
+    showInfoMessage
+} from "../../messageBar/MessageBar";
 
 const Facturacion = ({ setListaProductosExterna, continuarVista, listaProductosInterna, setClienteExterno, ClienteExterno }) => {
 	const [listProductos, setListProductos] = useState(listaProductosInterna);
@@ -34,6 +39,19 @@ const Facturacion = ({ setListaProductosExterna, continuarVista, listaProductosI
 	const [getDireccion, setDireccion] = useState("");
 	const [getRif, setRif] = useState("");
 	const [disabledInput, setDisabledInput] = useState(false);
+	const [message, setMessage] = useState({});
+	
+	const MESSAGE_DURATION = 3000;
+
+	useEffect(() => {
+		let messageTimer;
+		if (message.text) {
+			messageTimer = setTimeout(() => {
+				setMessage({});
+			}, MESSAGE_DURATION);
+		}
+		return () => clearTimeout(messageTimer);
+	}, [message]);
 
 	useEffect(() => {
 		fetch("/src/json/clientes.json")
@@ -79,7 +97,7 @@ const Facturacion = ({ setListaProductosExterna, continuarVista, listaProductosI
 					const index = listProductos.findIndex((element) => element.codigo === getCodigo);
 					if (index !== -1) {
 						if (parseFloat(getCantidad) <= 0) {
-							alert("La cantidad debe ser mayor a 0");
+							setMessage({ text: "La cantidad debe ser mayor a 0", severity: "warning" });
 							return;
 						}
 						const updatedProductos = [...listProductos];
@@ -92,7 +110,7 @@ const Facturacion = ({ setListaProductosExterna, continuarVista, listaProductosI
 						setValorCantidad("");
 					} else {
 						if (parseFloat(getCantidad) <= 0) {
-							alert("La cantidad debe ser mayor a 0");
+							setMessage({ text: "La cantidad debe ser mayor a 0", severity: "warning" });
 							return;
 						}
 						setListProductos([
@@ -112,7 +130,7 @@ const Facturacion = ({ setListaProductosExterna, continuarVista, listaProductosI
 						setValorCantidad("");
 					}
 				} else {
-					alert("Producto no encontrado");
+					setMessage({ text: "Producto no encontrado", severity: "error" });
 				}
 			});
 	};
@@ -182,12 +200,12 @@ const Facturacion = ({ setListaProductosExterna, continuarVista, listaProductosI
 
 	const createClient = () => {
 		if (getValorIdentificacion === "" || getDireccion === "" || getRif === "" || getName === "") {
-			alert("Por favor llene todos los campos");
+			setMessage({ text: "Por favor llene todos los campos", severity: "warning" });
 			return;
 		}
 		const client = getClientes.find((element) => element.ci === getValorIdentificacion);
 		if (client) {
-			alert("Cliente ya existe");
+			setMessage({ text: "Cliente ya existe", severity: "info" });
 			cleanInputs();
 			return;
 		}
@@ -249,12 +267,20 @@ const Facturacion = ({ setListaProductosExterna, continuarVista, listaProductosI
 		setValorNombre(getName);
 		setValorRif(getRif);
 		setDisabledInput(true);
-		alert("Cliente creado con exito");
+		setMessage({ text: "Cliente creado con exito", severity: "success" });
 	};
 
 	return (
 		<>
 			<div className="FacturaContainer">
+				{message && (
+                    <div className="message-bar-wrapper">
+                        {message.severity === "success" && showSuccessMessage(message.text, "left")}
+                        {message.severity === "error" && showErrorMessage(message.text, "left")}
+                        {message.severity === "warning" && showWarningMessage(message.text, "left")}
+                        {message.severity === "info" && showInfoMessage(message.text, "left")}
+                    </div>
+            	)}
 				<h1 className="FacturaHeaderContainer">Nueva Factura</h1>
 
 				<div className="FacturaInputsEntre2">
@@ -387,7 +413,7 @@ const Facturacion = ({ setListaProductosExterna, continuarVista, listaProductosI
 						img={cartSVG}
 						handleClick={() => {
 							if (listProductos.length === 0) {
-								alert("No hay productos en la factura");
+								setMessage({ text: "No hay productos en la factura", severity: "error" });
 								return;
 							}
 							if (
@@ -397,7 +423,7 @@ const Facturacion = ({ setListaProductosExterna, continuarVista, listaProductosI
 								!ClienteExterno.direccion ||
 								!ClienteExterno.rif
 							) {
-								alert("Por favor seleccione un cliente");
+								setMessage({ text: "Por favor seleccione un cliente", severity: "warning" });
 								return;
 							}
 							continuarVista();
