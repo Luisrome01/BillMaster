@@ -8,6 +8,14 @@ const CierreCajaTable = ({ width, height, color, data }) => {
 		height: height ? height : "85%",
 		backgroundColor: color ? color : "#ffffff",
 	};
+
+	const calculateIngresos = (metodosPago) => {
+		return metodosPago.reduce((total, metodo) => total + metodo.monto, 0);
+	};
+	const calculateEgresos = (metodosPago, monto) => {
+		return (metodosPago.reduce((total, metodo) => total + metodo.monto, 0) - monto).toFixed(2);
+	};
+
 	return (
 		<div style={style} className="cierreCajaTableContainer">
 			<div className="cierreCajaTableWrapper">
@@ -25,8 +33,8 @@ const CierreCajaTable = ({ width, height, color, data }) => {
 							<p>{fila.id}</p>
 							<p>{fila.date}</p>
 							<p>{fila.monto}</p>
-							<p>{fila.ingresos}</p>
-							<p>{fila.egresos}</p>
+							<p>{calculateIngresos(fila.metodosPago)}</p>
+							<p>{calculateEgresos(fila.metodosPago, fila.monto)}</p>
 						</div>
 					))}
 				</div>
