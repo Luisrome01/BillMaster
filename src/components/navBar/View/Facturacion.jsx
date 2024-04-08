@@ -5,8 +5,10 @@ import InputDinamico from "../../../components/inputs/InputDinamico";
 import InputDiferente from "../../../components/inputs/InputDiferente";
 import svgAdd from "../../../assets/svg_add.svg";
 import svgSearch from "../../../assets/SearchSVG.svg";
+import svgCatalog from "../../../assets/catalog.svg";
 import cartSVG from "../../../assets/marketKart.svg";
 import ProductTable from "../../tables/productTable";
+import ModalBuscar from "../../modal/ModalBuscar";
 import {
     showErrorMessage,
     showSuccessMessage,
@@ -39,6 +41,7 @@ const Facturacion = ({ setListaProductosExterna, continuarVista, listaProductosI
 	const [getDireccion, setDireccion] = useState("");
 	const [getRif, setRif] = useState("");
 	const [disabledInput, setDisabledInput] = useState(false);
+    const [openModal, setOpenModal] = useState(false);
 	const [message, setMessage] = useState({});
 	
 	const MESSAGE_DURATION = 3000;
@@ -53,6 +56,10 @@ const Facturacion = ({ setListaProductosExterna, continuarVista, listaProductosI
 		return () => clearTimeout(messageTimer);
 	}, [message]);
 
+	const handleClickModal = () => {
+        setOpenModal(true);
+	};
+	
 	useEffect(() => {
 		fetch("/src/json/clientes.json")
 			.then((response) => {
@@ -354,7 +361,7 @@ const Facturacion = ({ setListaProductosExterna, continuarVista, listaProductosI
 								/>
 							</div>
 							<div className="FacturaBuscar">
-								<button className="FacturaSearch">
+								<button className="FacturaSearch" onClick={handleClickModal}>
 									<img src={svgSearch}></img>
 								</button>
 							</div>
@@ -374,7 +381,12 @@ const Facturacion = ({ setListaProductosExterna, continuarVista, listaProductosI
 							/>
 						</div>
 						<div className="FacturaBotonAgregar">
-							<BtnGeneral img={svgAdd} text="Agregar Producto" width="200px" handleClick={addProduct} />
+							<BtnGeneral 
+								img={svgAdd} 
+								text="Agregar Producto" 
+								width="200px" 
+								handleClick={() => addProduct(getCodigo)} 
+							/>
 						</div>
 					</div>
 				</div>
@@ -429,6 +441,11 @@ const Facturacion = ({ setListaProductosExterna, continuarVista, listaProductosI
 							continuarVista();
 						}}
 					/>
+					{openModal && (
+						<ModalBuscar
+							closeModal={setOpenModal}
+						/>
+					)}
 				</div>
 			</div>
 		</>
