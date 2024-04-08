@@ -2,15 +2,25 @@ import React from "react";
 import addSVG from "../../assets/svg_add.svg";
 import "./css/buscarProductoTable.css";
 
-const BuscarProductoTable = ({ width, height, color, rows }) => {
+const BuscarProductoTable = ({ width, height, color, rows, agregarProducto, closeModal }) => {
     const style = {
         width: width ? width : "90%",
         height: height ? height : "85%",
         backgroundColor: color ? color : "#ffffff",
     };
 
-    const agregarProducto = (producto) => {
-        console.log("Agregar producto:", producto.id);
+    const agregarProductoLocal = (producto) => {
+        const productoConDetalles = {
+            ...producto,
+            codigo: producto.id,
+            descripcion: producto.name,
+            cantidad: 1,
+            precio: producto.price,
+            iva: producto.IVA,
+            total: producto.total
+        };
+        agregarProducto(productoConDetalles);
+        closeModal();
     };
 
     return (
@@ -27,7 +37,7 @@ const BuscarProductoTable = ({ width, height, color, rows }) => {
                     {rows.map((producto) => (
                         <div key={producto.id} className="SearchTableRow">
                             <button
-                                onClick={() => agregarProducto(producto)}
+                                onClick={() => agregarProductoLocal(producto)}
                                 style={{
                                     justifySelf: "center",
                                     border: "none",

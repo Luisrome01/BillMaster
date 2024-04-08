@@ -59,6 +59,10 @@ const Facturacion = ({ setListaProductosExterna, continuarVista, listaProductosI
 	const handleClickModal = () => {
         setOpenModal(true);
 	};
+
+	const handleCloseModal = () => {
+        setOpenModal(false);
+    };
 	
 	useEffect(() => {
 		fetch("/src/json/clientes.json")
@@ -87,6 +91,18 @@ const Facturacion = ({ setListaProductosExterna, continuarVista, listaProductosI
 			const updatedProductos = [...listProductos];
 			updatedProductos.splice(index, 1);
 			setListProductos(updatedProductos);
+		}
+	};
+
+	const agregarProducto = (producto) => {
+		const index = listProductos.findIndex((p) => p.codigo === producto.codigo);
+		if (index !== -1) {
+			const updatedProductos = [...listProductos];
+			updatedProductos[index].cantidad += producto.cantidad;
+			updatedProductos[index].total += producto.total;
+			setListProductos(updatedProductos);
+		} else {
+			setListProductos([...listProductos, producto]);
 		}
 	};
 
@@ -443,7 +459,8 @@ const Facturacion = ({ setListaProductosExterna, continuarVista, listaProductosI
 					/>
 					{openModal && (
 						<ModalBuscar
-							closeModal={setOpenModal}
+							closeModal={handleCloseModal}
+							agregarProducto={agregarProducto}
 						/>
 					)}
 				</div>

@@ -2,11 +2,10 @@ import React, { useState, useEffect } from "react";
 import BtnGeneral from "../buttons/BtnGeneral";
 import BuscarProductoTable from "../tables/buscarProductoTable";
 import InputBusqueda from "../inputs/InputBusqueda";
-//import svgSearch from "../../assets/SearchSVG.svg";
 import productosData from "../../json/productos.json";
 import "./css/ModalBuscar.css";
 
-const ModalBuscar = ({ closeModal }) => {
+const ModalBuscar = ({ closeModal, agregarProducto }) => {
     const [data, setData] = useState([]);
     const [filteredData, setFilteredData] = useState([]);
     const [searchTerm, setSearchTerm] = useState('');
@@ -61,14 +60,13 @@ const ModalBuscar = ({ closeModal }) => {
                                 value={searchTerm}
                                 onChange={handleSearchChange}
                             />
-                            {/* <button className="productSearch">
-                                <img src={svgSearch} alt="Search" />
-                            </button> */}
                         </div>
                         <BuscarProductoTable
                             width="90%"
                             height="85%"
                             rows={filteredData}
+                            agregarProducto={agregarProducto}
+                            closeModal={closeModal}
                         />
                         <div className="spacer"></div>
                     </div>
