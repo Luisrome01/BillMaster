@@ -93,7 +93,7 @@ const MetodosPago = ({ totalCosto, listaProductos, cliente, setClienteExterno, s
 		const doc = new jsPDF();
 		doc.setFontSize(16);
 		doc.setFont("Courier", "bold");
-		doc.text("SENIAN'T", 90, 10);
+		doc.text("SENIAT", 90, 10);
 		doc.setFont("Courier", "normal");
 		doc.text("BillMaster. C.A.", 78, 20);
 		doc.text("billmaster calle 123", 68, 30);
