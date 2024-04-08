@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "./css/InputDinamico.css";
 
-function InputDinamico({ width, height, color, onBlur, onTypeChange, onValueChange, value }) {
+function InputDinamico({ width, height, color, onBlur, onTypeChange, onValueChange, value, onEnter }) {
 	// Estado para almacenar el tipo de documento seleccionado y el valor ingresado
 	const [tipoDocumento, setTipoDocumento] = useState("Cedula");
 	const [valorDocumento, setValorDocumento] = useState("");
@@ -43,6 +43,11 @@ function InputDinamico({ width, height, color, onBlur, onTypeChange, onValueChan
 						type="text"
 						value={valorDocumento ? valorDocumento : ""}
 						onChange={handleValorDocumentoChange}
+						onKeyDown={(Event) => {
+							if (Event.key === "Enter") {
+								onEnter();
+							}
+						}}
 						placeholder={`Ingrese el número de documento`}
 						onBlur={onBlur ? onBlur : undefined}
 					/>

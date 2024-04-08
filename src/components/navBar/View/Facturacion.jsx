@@ -318,6 +318,7 @@ const Facturacion = ({ setListaProductosExterna, continuarVista, listaProductosI
 									onBlur={handleOnBlur}
 									onTypeChange={(newType) => setIdentificacion(newType)}
 									onValueChange={(newValue) => setValorIdentificacion(newValue)}
+									onEnter={handleOnBlur}
 								/>
 							</div>
 
@@ -330,6 +331,7 @@ const Facturacion = ({ setListaProductosExterna, continuarVista, listaProductosI
 									placeholder="ej. Jhon Doe"
 									onChange={(newName) => setName(newName)}
 									disabled={disabledInput}
+									
 								/>
 							</div>
 						</div>
@@ -374,6 +376,8 @@ const Facturacion = ({ setListaProductosExterna, continuarVista, listaProductosI
 										setCodigo(newValue);
 										setValorCodigo(newValue);
 									}}
+									onEnter={addProduct}
+									
 								/>
 							</div>
 							<div className="FacturaBuscar">
@@ -394,6 +398,8 @@ const Facturacion = ({ setListaProductosExterna, continuarVista, listaProductosI
 									setCantidad(newCantidad);
 									setValorCantidad(newCantidad);
 								}}
+								onEnter={addProduct}
+								
 							/>
 						</div>
 						<div className="FacturaBotonAgregar">
