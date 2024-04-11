@@ -9,12 +9,7 @@ import svgCatalog from "../../../assets/catalog.svg";
 import cartSVG from "../../../assets/marketKart.svg";
 import ProductTable from "../../tables/productTable";
 import ModalBuscar from "../../modal/ModalBuscar";
-import {
-    showErrorMessage,
-    showSuccessMessage,
-    showWarningMessage,
-    showInfoMessage
-} from "../../messageBar/MessageBar";
+import { showErrorMessage, showSuccessMessage, showWarningMessage, showInfoMessage } from "../../messageBar/MessageBar";
 
 const Facturacion = ({ setListaProductosExterna, continuarVista, listaProductosInterna, setClienteExterno, ClienteExterno }) => {
 	const [listProductos, setListProductos] = useState(listaProductosInterna);
@@ -22,28 +17,22 @@ const Facturacion = ({ setListaProductosExterna, continuarVista, listaProductosI
 	const [getCantidad, setCantidad] = useState(1);
 	const [getCodigo, setCodigo] = useState("");
 	const [getIdentificacion, setIdentificacion] = useState("Cedula");
-	const [getValorIdentificacion, setValorIdentificacion] = useState(
-		ClienteExterno
-			? ClienteExterno.ci
-				? ClienteExterno.ci
-				: ClienteExterno.pasaporte
-				? ClienteExterno.pasaporte
-				: ClienteExterno.idExtranjera
-			: ""
-	);
+	const [getValorIdentificacion, setValorIdentificacion] = useState(ClienteExterno ? ClienteExterno.identificacion : "");
 	const [getClientes, setClientes] = useState([]);
 	const [getValorNombre, setValorNombre] = useState(ClienteExterno ? ClienteExterno.name : "");
 	const [getValorDireccion, setValorDireccion] = useState(ClienteExterno ? ClienteExterno.direccion : "");
 	const [getValorRif, setValorRif] = useState(ClienteExterno ? ClienteExterno.rif : "");
 	const [getValorCodigo, setValorCodigo] = useState("");
 	const [getValorCantidad, setValorCantidad] = useState("");
-	const [getName, setName] = useState("");
-	const [getDireccion, setDireccion] = useState("");
-	const [getRif, setRif] = useState("");
+	const [getName, setName] = useState(ClienteExterno ? ClienteExterno.name : "");
+	const [getDireccion, setDireccion] = useState(ClienteExterno ? ClienteExterno.direccion : "");
+	const [getRif, setRif] = useState(ClienteExterno ? ClienteExterno.rif : "");
 	const [disabledInput, setDisabledInput] = useState(false);
-    const [openModal, setOpenModal] = useState(false);
+	const [openModal, setOpenModal] = useState(false);
 	const [message, setMessage] = useState({});
-	
+	const [crearClienteDisabled, setCrearClienteDisabled] = useState(ClienteExterno ? (ClienteExterno.identificacion ? true : false) : false);
+	const [continueMetodoPago, setContinueMetodoPago] = useState(true);
+
 	const MESSAGE_DURATION = 3000;
 
 	useEffect(() => {
@@ -57,13 +46,13 @@ const Facturacion = ({ setListaProductosExterna, continuarVista, listaProductosI
 	}, [message]);
 
 	const handleClickModal = () => {
-        setOpenModal(true);
+		setOpenModal(true);
 	};
 
 	const handleCloseModal = () => {
-        setOpenModal(false);
-    };
-	
+		setOpenModal(false);
+	};
+
 	useEffect(() => {
 		fetch("/src/json/clientes.json")
 			.then((response) => {
@@ -76,14 +65,6 @@ const Facturacion = ({ setListaProductosExterna, continuarVista, listaProductosI
 				setClientes(data.data);
 			});
 	}, []);
-
-	useEffect(() => {
-		let total = 0;
-		listProductos.forEach((element) => {
-			total += parseFloat(element.total);
-		});
-		setMontoTotal(total.toFixed(2));
-	}, [listProductos]);
 
 	const eliminarProducto = (codigo) => {
 		const index = listProductos.findIndex((element) => element.codigo === codigo);
@@ -160,7 +141,27 @@ const Facturacion = ({ setListaProductosExterna, continuarVista, listaProductosI
 
 	useEffect(() => {
 		setListaProductosExterna(listProductos);
+		let total = 0;
+		listProductos.forEach((element) => {
+			total += parseFloat(element.total);
+		});
+		setMontoTotal(total.toFixed(2));
+		if (ClienteExterno) {
+			if (ClienteExterno.identificacion && listProductos.length > 0) {
+				setContinueMetodoPago(false);
+			} else {
+				setContinueMetodoPago(true);
+			}
+		}
 	}, [listProductos]);
+
+	useEffect(() => {
+		if (ClienteExterno && ClienteExterno.identificacion && listProductos.length > 0) {
+			setContinueMetodoPago(false);
+		} else {
+			setContinueMetodoPago(true);
+		}
+	}, [ClienteExterno]);
 
 	const cleanInputs = () => {
 		setValorNombre("");
@@ -180,8 +181,11 @@ const Facturacion = ({ setListaProductosExterna, continuarVista, listaProductosI
 					client.identificationType = "C.I.";
 					client.identificacion = getValorIdentificacion;
 					setClienteExterno(client);
+					setCrearClienteDisabled(true);
 				} else {
 					setDisabledInput(false);
+					setClienteExterno({});
+					setCrearClienteDisabled(false);
 					cleanInputs();
 				}
 				break;
@@ -195,8 +199,11 @@ const Facturacion = ({ setListaProductosExterna, continuarVista, listaProductosI
 					client2.identificationType = "PASAPORTE";
 					client2.identificacion = getValorIdentificacion;
 					setClienteExterno(client2);
+					setCrearClienteDisabled(true);
 				} else {
 					setDisabledInput(false);
+					setClienteExterno({});
+					setCrearClienteDisabled(false);
 					cleanInputs();
 				}
 				break;
@@ -210,8 +217,11 @@ const Facturacion = ({ setListaProductosExterna, continuarVista, listaProductosI
 					client3.identificationType = "ID EXTRANJERO";
 					client3.identificacion = getValorIdentificacion;
 					setClienteExterno(client3);
+					setCrearClienteDisabled(true);
 				} else {
 					setDisabledInput(false);
+					setClienteExterno({});
+					setCrearClienteDisabled(false);
 					cleanInputs();
 				}
 				break;
@@ -229,7 +239,6 @@ const Facturacion = ({ setListaProductosExterna, continuarVista, listaProductosI
 		const client = getClientes.find((element) => element.ci === getValorIdentificacion);
 		if (client) {
 			setMessage({ text: "Cliente ya existe", severity: "info" });
-			cleanInputs();
 			return;
 		}
 		switch (getIdentificacion) {
@@ -241,6 +250,8 @@ const Facturacion = ({ setListaProductosExterna, continuarVista, listaProductosI
 						name: getName,
 						direccion: getDireccion,
 						rif: getRif,
+						identificacion: getValorIdentificacion,
+						tipoIdentificacion: "C.I.",
 					},
 				]);
 				setClienteExterno({
@@ -248,6 +259,8 @@ const Facturacion = ({ setListaProductosExterna, continuarVista, listaProductosI
 					name: getName,
 					direccion: getDireccion,
 					rif: getRif,
+					identificacion: getValorIdentificacion,
+					tipoIdentificacion: "C.I.",
 				});
 
 				break;
@@ -259,6 +272,8 @@ const Facturacion = ({ setListaProductosExterna, continuarVista, listaProductosI
 						name: getName,
 						direccion: getDireccion,
 						rif: getRif,
+						identificacion: getValorIdentificacion,
+						tipoIdentificacion: "PASAPORTE",
 					},
 				]);
 				setClienteExterno({
@@ -266,6 +281,8 @@ const Facturacion = ({ setListaProductosExterna, continuarVista, listaProductosI
 					name: getName,
 					direccion: getDireccion,
 					rif: getRif,
+					identificacion: getValorIdentificacion,
+					tipoIdentificacion: "PASAPORTE",
 				});
 				break;
 			case "ID Extranjero":
@@ -276,6 +293,8 @@ const Facturacion = ({ setListaProductosExterna, continuarVista, listaProductosI
 						name: getName,
 						direccion: getDireccion,
 						rif: getRif,
+						identificacion: getValorIdentificacion,
+						tipoIdentificacion: "ID EXTRANJERO",
 					},
 				]);
 				setClienteExterno({
@@ -283,6 +302,8 @@ const Facturacion = ({ setListaProductosExterna, continuarVista, listaProductosI
 					name: getName,
 					direccion: getDireccion,
 					rif: getRif,
+					identificacion: getValorIdentificacion,
+					tipoIdentificacion: "ID EXTRANJERO",
 				});
 				break;
 		}
@@ -291,19 +312,20 @@ const Facturacion = ({ setListaProductosExterna, continuarVista, listaProductosI
 		setValorRif(getRif);
 		setDisabledInput(true);
 		setMessage({ text: "Cliente creado con exito", severity: "success" });
+		setCrearClienteDisabled(true);
 	};
 
 	return (
 		<>
 			<div className="FacturaContainer">
 				{message && (
-                    <div className="message-bar-wrapper">
-                        {message.severity === "success" && showSuccessMessage(message.text, "left")}
-                        {message.severity === "error" && showErrorMessage(message.text, "left")}
-                        {message.severity === "warning" && showWarningMessage(message.text, "left")}
-                        {message.severity === "info" && showInfoMessage(message.text, "left")}
-                    </div>
-            	)}
+					<div className="message-bar-wrapper">
+						{message.severity === "success" && showSuccessMessage(message.text, "left")}
+						{message.severity === "error" && showErrorMessage(message.text, "left")}
+						{message.severity === "warning" && showWarningMessage(message.text, "left")}
+						{message.severity === "info" && showInfoMessage(message.text, "left")}
+					</div>
+				)}
 				<h1 className="FacturaHeaderContainer">Nueva Factura</h1>
 
 				<div className="FacturaInputsEntre2">
@@ -331,7 +353,6 @@ const Facturacion = ({ setListaProductosExterna, continuarVista, listaProductosI
 									placeholder="ej. Jhon Doe"
 									onChange={(newName) => setName(newName)}
 									disabled={disabledInput}
-									
 								/>
 							</div>
 						</div>
@@ -360,7 +381,13 @@ const Facturacion = ({ setListaProductosExterna, continuarVista, listaProductosI
 								/>
 							</div>
 							<div className="FacturaBotonCrear">
-								<BtnGeneral img={svgAdd} text="Crear Cliente" width="165px" handleClick={createClient} />
+								<BtnGeneral
+									img={svgAdd}
+									text="Crear Cliente"
+									width="165px"
+									handleClick={createClient}
+									disabled={crearClienteDisabled}
+								/>
 							</div>
 						</div>
 					</div>
@@ -377,13 +404,13 @@ const Facturacion = ({ setListaProductosExterna, continuarVista, listaProductosI
 										setValorCodigo(newValue);
 									}}
 									onEnter={addProduct}
-									
 								/>
 							</div>
 							<div className="FacturaBuscar">
 								<button className="FacturaSearch" onClick={handleClickModal}>
 									<img src={svgSearch}></img>
 								</button>
+								{openModal && <ModalBuscar closeModal={handleCloseModal} agregarProducto={agregarProducto} />}
 							</div>
 						</div>
 						<div className="FacturaCantidad">
@@ -399,16 +426,10 @@ const Facturacion = ({ setListaProductosExterna, continuarVista, listaProductosI
 									setValorCantidad(newCantidad);
 								}}
 								onEnter={addProduct}
-								
 							/>
 						</div>
 						<div className="FacturaBotonAgregar">
-							<BtnGeneral 
-								img={svgAdd} 
-								text="Agregar Producto" 
-								width="200px" 
-								handleClick={() => addProduct(getCodigo)} 
-							/>
+							<BtnGeneral img={svgAdd} text="Agregar Producto" width="200px" handleClick={() => addProduct(getCodigo)} />
 						</div>
 					</div>
 				</div>
@@ -462,13 +483,8 @@ const Facturacion = ({ setListaProductosExterna, continuarVista, listaProductosI
 							}
 							continuarVista();
 						}}
+						disabled={continueMetodoPago}
 					/>
-					{openModal && (
-						<ModalBuscar
-							closeModal={handleCloseModal}
-							agregarProducto={agregarProducto}
-						/>
-					)}
 				</div>
 			</div>
 		</>

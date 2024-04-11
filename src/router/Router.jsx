@@ -9,7 +9,7 @@ const Router = () => {
 		<>
 			<Routes>
 				<Route path="/" element={<Login setUser={setUser} />} />
-				<Route path="/main" element={<MainView getUser={user ? user.name : "Usuario"} />} />
+				<Route path="/main" element={<MainView getUser={user ? user.name : undefined} />} />
 			</Routes>
 		</>
 	);

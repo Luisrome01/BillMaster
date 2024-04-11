@@ -39,9 +39,7 @@ const ProductTable = ({ width, height, color, rows, eliminarProducto }) => {
 							<p>$ {fila.precio}</p>
 							<p>$ {fila.iva}</p>
 							<p>$ {fila.total.toFixed(2)}</p>
-							<button style={{ border: "none", backgroundColor: "transparent", paddingRight: "15px" }}>
-								<img src={exploreSVG}></img>
-							</button>
+							<p></p>
 						</div>
 					))}
 				</div>

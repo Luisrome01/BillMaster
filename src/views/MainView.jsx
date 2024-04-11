@@ -30,6 +30,10 @@ const MainView = ({ getUser }) => {
 		setComponenteActivo("Facturacion");
 	};
 
+	if (!getUser) {
+		window.location.href = "/";
+	}
+
 	return (
 		<div className="MainContainer">
 			<div className="MainNavContainer">

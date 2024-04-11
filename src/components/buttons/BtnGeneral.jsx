@@ -2,7 +2,7 @@ import React from "react";
 import "./css/btn.css";
 import { useState } from "react";
 
-const BtnGeneral = ({ text, handleClick, gap, width, height, color, onHoverColor, borderRadius, img, shadow}) => {
+const BtnGeneral = ({ text, handleClick, gap, width, height, color, onHoverColor, borderRadius, img, shadow, disabled }) => {
 	const [isHovered, setIsHovered] = useState(false);
 
 	const handleMouseEnter = () => {
@@ -37,6 +37,8 @@ const BtnGeneral = ({ text, handleClick, gap, width, height, color, onHoverColor
 		...(isHovered && { backgroundColor: onHoverColor ? onHoverColor : "#8E9BFF", cursor: "pointer" }),
 		// Anima que el boton se hunda cuando se presiona
 		...(isPressed && { transform: "scale(0.95)", boxShadow: "0px 2px 2px rgba(0, 0, 0, 0.75)" }),
+		// Desactiva el boton
+		...(disabled && { color: "rgba(0, 0, 0, 0.5)", backgroundColor: "rgba(138, 138, 138, 0.5)", cursor: "not-allowed" }),
 	};
 	return (
 		<div>
@@ -48,6 +50,7 @@ const BtnGeneral = ({ text, handleClick, gap, width, height, color, onHoverColor
 				onMouseDown={handlePress}
 				onMouseUp={handleRelease}
 				className="BtnGeneral"
+				disabled={disabled ? true : false}
 			>
 				<img src={img} />
 				{text}
