@@ -205,6 +205,7 @@ const MetodosPago = ({ totalCosto, listaProductos, cliente, setClienteExterno, s
 						color="#ff6060"
 						onHoverColor="#c54444"
 						img={cartSVG}
+						disabled={parseFloat(montoTotal) - listMetodosPago.reduce((acc, curr) => acc + curr.monto, 0) > 0}
 						handleClick={() => {
 							if (parseFloat(montoTotal) - listMetodosPago.reduce((acc, curr) => acc + curr.monto, 0) > 0) {
 								setMessage({ text: "Faltan pagos por realizar", severity: "error" });
