@@ -2,7 +2,7 @@ import React from "react";
 import "./css/btn.css";
 import { useState } from "react";
 
-const BtnGeneral = ({ text, handleClick, gap, width, height, color, onHoverColor, borderRadius, img, shadow}) => {
+const BtnGeneral = ({ text, handleClick, gap, width, height, color, onHoverColor, borderRadius, img, shadow, disabled }) => {
 	const [isHovered, setIsHovered] = useState(false);
 
 	const handleMouseEnter = () => {
@@ -28,7 +28,7 @@ const BtnGeneral = ({ text, handleClick, gap, width, height, color, onHoverColor
 		gap: gap ? gap : "10px",
 		width: width ? width : "110px",
 		height: height ? height : "46px",
-		backgroundColor: color ? color : "#AEBBFD",
+		backgroundColor: disabled ? "#D3D3D3" : color ? color : "#AEBBFD",
 		borderRadius: borderRadius ? borderRadius : "11.4167px",
 		boxShadow: shadow ? shadow : "1.90278px 3.80556px 0px #000000",
 		transition: "background-color 0.3s, transform 0.1s, box-shadow 0.1s",
@@ -41,17 +41,18 @@ const BtnGeneral = ({ text, handleClick, gap, width, height, color, onHoverColor
 	return (
 		<div>
 			<button
-				style={style}
-				onClick={handleClick}
-				onMouseEnter={handleMouseEnter}
-				onMouseLeave={handleMouseLeave}
-				onMouseDown={handlePress}
-				onMouseUp={handleRelease}
-				className="BtnGeneral"
-			>
-				<img src={img} />
-				{text}
-			</button>
+        style={style}
+        onClick={handleClick}
+        onMouseEnter={handleMouseEnter}
+        onMouseLeave={handleMouseLeave}
+        onMouseDown={handlePress}
+        onMouseUp={handleRelease}
+        className="BtnGeneral"
+        disabled={disabled} // Conditionally apply disabled state to the button
+    >
+        <img src={img} />
+        {text}
+    </button>
 		</div>
 	);
 };
