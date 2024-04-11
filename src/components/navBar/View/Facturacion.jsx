@@ -232,7 +232,17 @@ const Facturacion = ({ setListaProductosExterna, continuarVista, listaProductosI
 	};
 
 	const createClient = () => {
-		if (getValorIdentificacion === "" || getDireccion === "" || getRif === "" || getName === "") {
+		console.log(getName, getDireccion, getRif, getValorIdentificacion, getIdentificacion);
+		if (
+			getValorIdentificacion === "" ||
+			getValorIdentificacion === undefined ||
+			getDireccion === "" ||
+			getDireccion === undefined ||
+			getRif === "" ||
+			getRif === undefined ||
+			getName === "" ||
+			getName === undefined
+		) {
 			setMessage({ text: "Por favor llene todos los campos", severity: "warning" });
 			return;
 		}
